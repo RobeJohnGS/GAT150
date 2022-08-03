@@ -2,13 +2,13 @@
 #include "Math/Vector2.h"
 #include <string>
 //Not supposed to be here
-#include "Renderer/Renderer.h"
+//#include "Renderer/Renderer.h"
 
 //Forward Declaration
 struct SDL_Texture;
-//class Renderer;
 
 namespace JREngine {
+	class Renderer;
 	class Texture {
 	public:
 		Texture() = default;

@@ -3,6 +3,13 @@
 
 int main()
 {
+	int i = 10;
+	float f = 3.5f;
+	bool b = true;
+	if (b) {
+		std::cout << "True\n";
+	}
+
 	JREngine::InitializeMemory();
 
 	JREngine::SetFilePath("../Assets");
@@ -13,6 +20,9 @@ int main()
 
 	JREngine::renderer_g.CreateWindow("Engine", 800, 600); // Creates the window with parameters
 	JREngine::renderer_g.SetClearColor(JREngine::Color{ 255, 125, 125, 255 });
+
+	std::shared_ptr<JREngine::Texture> texture = std::make_shared<JREngine::Texture>();
+	texture->Create(JREngine::renderer_g, "jack-frost.png");
 
 	bool quit = false;
 	while (!quit)
@@ -29,7 +39,7 @@ int main()
 		// Render
 		JREngine::renderer_g.BeginFrame();
 
-
+		JREngine::renderer_g.Draw(texture, { 400, 300 }, 0);
 
 		JREngine::renderer_g.EndFrame();
 	}

@@ -54,4 +54,17 @@ namespace JREngine {
 		SDL_SetRenderDrawColor(m_renderer, color.r, color.g, color.b, color.a);
 		SDL_RenderDrawPointF(m_renderer, v.x, v.y);
 	}
+
+	void Renderer::Draw(std::shared_ptr<Texture> texture, const Vector2& pos, float angle){
+		Vector2 size = texture->GetSize();
+
+		SDL_Rect dest;
+
+		dest.x = pos.x;
+		dest.y = pos.y;
+		dest.w = size.x;
+		dest.h = size.y;
+
+		SDL_RenderCopyEx(m_renderer, texture->m_texture, nullptr, &dest, angle, nullptr, SDL_FLIP_NONE);
+	}
 }

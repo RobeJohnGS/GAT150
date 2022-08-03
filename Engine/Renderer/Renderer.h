@@ -1,6 +1,7 @@
 #pragma once
 #include "../Math/Vector2.h"
 #include "../Math/Color.h"
+#include "Texture.h"
 
 struct SDL_Renderer;
 struct SDL_Window;
@@ -24,10 +25,15 @@ namespace JREngine {
 		void DrawPoint(float x1, float y1);
 		void DrawPoint(const Vector2& v, const Color& color);
 
+		void Draw(std::shared_ptr<Texture> texture, const Vector2& pos, float angle = 0);
+
 		int GetWidth_() { return m_width; }
 		int GetHeight_() { return m_height; }
 
+		SDL_Renderer* GetRenderer() { return m_renderer; }
+
 		friend class Text;
+		friend class Texture;
 
 	private:
 		int m_width = 0;
