@@ -7,6 +7,9 @@ struct SDL_Renderer;
 struct SDL_Window;
 
 namespace JREngine {
+	//class Texture;
+	class Transform;
+
 	class Renderer {
 	public:
 		Renderer() = default;
@@ -25,7 +28,8 @@ namespace JREngine {
 		void DrawPoint(float x1, float y1);
 		void DrawPoint(const Vector2& v, const Color& color);
 
-		void Draw(std::shared_ptr<Texture> texture, const Vector2& pos, float angle = 0);
+		void Draw(std::shared_ptr<Texture> texture, const Vector2& pos, float angle = 0, const Vector2& scale = Vector2{ 1, 1 }, const Vector2& registration = Vector2{0.5f, 0.5f});
+		void Draw(std::shared_ptr<Texture> texture, const Transform& transform, const Vector2& registration = Vector2{ 0.5f, 0.5f });
 
 		int GetWidth_() { return m_width; }
 		int GetHeight_() { return m_height; }

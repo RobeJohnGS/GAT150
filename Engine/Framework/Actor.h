@@ -19,7 +19,7 @@ namespace JREngine
 		virtual void OnCollision(Actor* other){}
 		
 		float GetRadius() {
-			return m_model.GetRadius() * transform_.scale;
+			return m_model.GetRadius() * std::max(transform_.scale.x, transform_.scale.y);
 		}
 		
 		std::string& GetTag() {

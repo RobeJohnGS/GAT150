@@ -1,12 +1,12 @@
 #include "Texture.h"
 #include "Renderer/Renderer.h"
-#include "Core/Logger.h"
+//#include "Core/Logger.h"
 #include <SDL.h>
 #include <SDL_image.h>
 
 namespace JREngine {
 	Texture::~Texture(){
-		if (m_texture) {
+		if (m_texture != NULL) {
 			SDL_DestroyTexture(m_texture);
 		}
 	}
@@ -14,14 +14,14 @@ namespace JREngine {
 	bool Texture::Create(Renderer& renderer, const std::string& filename)
 	{
 		SDL_Surface* surface = IMG_Load(filename.c_str());
-		if (surface == nullptr) {
+		/*if (surface == nullptr) {
 			LOG(SDL_GetError());
 			return false;
-		}
+		}*/
 
 		m_texture = SDL_CreateTextureFromSurface(renderer.GetRenderer(), surface);
 		if (m_texture == nullptr) {
-			LOG(SDL_GetError());
+			//LOG(SDL_GetError());
 			SDL_FreeSurface(surface);
 			return false;
 		}
