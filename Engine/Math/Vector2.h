@@ -33,6 +33,14 @@ namespace JREngine
 
 		static Vector2 Rotate(const Vector2& v, float angle);
 
+		static const Vector2 zero;
+		static const Vector2 one;
+
+		static const Vector2 up;
+		static const Vector2 down;
+		static const Vector2 left;
+		static const Vector2 right;
+
 		//Arithmetic Operators
 		//Vector2 = Vector2 + Vector2
 		Vector2 operator + (const Vector2& v) const { return Vector2{ this->x + v.x, this->y + v.y }; }
@@ -67,19 +75,8 @@ namespace JREngine
 		bool operator != (const Vector2& v) const { return (this->x != v.x || this->y != v.y); }
 	};
 
-	inline std::istream& operator >> (std::istream& stream, Vector2& v)
-	{
-		std::string line;
-		std::getline(stream, line);
-
-		std::string xstring = line.substr(line.find("{") + 1, line.find(",") - (line.find("{") - 1));
-		v.x = std::stof(xstring);
-
-		std::string ystring = line.substr(line.find(",") + 1, line.find("}") - (line.find(",") + 1));
-		v.y = std::stof(ystring);
-
-		return stream;
-	}
+	//Defined in Vector2.cpp
+	std::istream& operator >> (std::istream& stream, Vector2& v);
 
 	inline float Vector2::LengthSqr() { 
 		return (x * x) + (y * y); 

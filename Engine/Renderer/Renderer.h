@@ -8,7 +8,7 @@ struct SDL_Window;
 
 namespace JREngine {
 	//class Texture;
-	class Transform;
+	struct Transform;
 
 	class Renderer {
 	public:

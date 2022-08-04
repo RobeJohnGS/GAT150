@@ -32,10 +32,12 @@ int main()
 			quit = true;
 		}
 
+		//angle += 1;
+
 		// Render
 		JREngine::renderer_g.BeginFrame();
 
-		JREngine::renderer_g.Draw(texture, { 0, 0 }, angle, { 0.5f, 0.5f }, { 0.5f, 0.1f });
+		JREngine::renderer_g.Draw(texture, { 400, 300 }, angle, { 0.5f, 0.5f }, { 0.5f, 0.5f });
 
 		JREngine::renderer_g.EndFrame();
 	}
