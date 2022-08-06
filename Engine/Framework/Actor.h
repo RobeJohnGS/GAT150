@@ -15,7 +15,7 @@ namespace JREngine
 		//Actor(const Model& model, const Transform& transform) : GameObject{ transform }, m_model{ model }  {}
 		Actor(const Transform& transform) : transform_{ transform } {}
 
-		virtual void Update() override {}
+		virtual void Update() override;
 		virtual void Draw(Renderer& renderer);
 
 		void AddComponent(std::unique_ptr<Component> component);

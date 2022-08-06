@@ -3,6 +3,9 @@
 #include "Core/File.h"
 #include "Core/Time.h"
 
+#include "Components/PlayerComponent.h"
+#include "Components/SpriteComponent.h"
+
 #include "Input/InputSystem.h"
 
 #include "Renderer/Renderer.h"
@@ -19,6 +22,8 @@
 #include "Audio/AudioSystem.h"
 
 #include <memory>
+#include <vector>
+#include <list>
 
 namespace JREngine
 {

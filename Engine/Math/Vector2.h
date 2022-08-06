@@ -73,6 +73,13 @@ namespace JREngine
 		//Vector2 == Vector2
 		bool operator == (const Vector2& v) const { return (this->x == v.x && this->y == v.y); }
 		bool operator != (const Vector2& v) const { return (this->x != v.x || this->y != v.y); }
+
+		static const Vector2 one;
+		static const Vector2 zero;
+		static const Vector2 up;
+		static const Vector2 down;
+		static const Vector2 left;
+		static const Vector2 right;
 	};
 
 	//Defined in Vector2.cpp
