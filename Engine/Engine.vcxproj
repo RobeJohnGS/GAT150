@@ -172,6 +172,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Audio\AudioSystem.cpp" />
+    <ClCompile Include="Components\PlayerComponent.cpp" />
     <ClCompile Include="Core\File.cpp" />
     <ClCompile Include="Core\Logger.cpp" />
     <ClCompile Include="Core\Memory.cpp" />
@@ -191,12 +192,14 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Audio\AudioSystem.h" />
+    <ClInclude Include="Components\PlayerComponent.h" />
     <ClInclude Include="Core\File.h" />
     <ClInclude Include="Core\Logger.h" />
     <ClInclude Include="Core\Memory.h" />
     <ClInclude Include="Core\Time.h" />
     <ClInclude Include="Engine.h" />
     <ClInclude Include="Framework\Actor.h" />
+    <ClInclude Include="Framework\Component.h" />
     <ClInclude Include="Framework\Game.h" />
     <ClInclude Include="Framework\GameObject.h" />
     <ClInclude Include="Framework\Scene.h" />

@@ -12,10 +12,6 @@ namespace JREngine {
 	}
 
 	void AudioSystem::Shutdown(){
-		// !! use range based for-loop to iterate through m_sounds, call release on each element 
-		 // !! call clear() on m_sounds to remove all elements 
-		// !! call close() on the fmod system 
-		// !! call release() on the fmod system 
 		for (auto sounds : m_sounds) {
 			sounds.second->release();
 		}
@@ -34,7 +30,7 @@ namespace JREngine {
 			FMOD::Sound* sound = nullptr;
 			m_fmodSystem->createSound(filename.c_str(), FMOD_DEFAULT, 0, &sound);
 			if (sound == nullptr) {
-				//LOG("Error creating sound %s", filename.c_str());
+				LOG("Error creating sound %s", filename.c_str());
 			}
 			m_sounds[name] = sound;
 		}
@@ -44,7 +40,7 @@ namespace JREngine {
 		auto iter = m_sounds.find(name);
 
 		if (iter == m_sounds.end()) {
-			//LOG("Error could not find sound %s", name.c_str());
+			LOG("Error could not find sound %s", name.c_str());
 		}
 
 		if (iter != m_sounds.end()) {

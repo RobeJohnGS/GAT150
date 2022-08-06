@@ -28,7 +28,6 @@ int main()
 		JREngine::inputSystem_g.Update();
 		JREngine::audioSystem_g.Update();
 
-		//cock
 		if (JREngine::inputSystem_g.onKeyEsc(JREngine::InputSystem::KeyState::Pressed)) {
 			quit = true;
 		}

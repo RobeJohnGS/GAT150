@@ -2,6 +2,7 @@
 #include "Actor.h"
 #include <list>
 #include <memory>
+
 namespace JREngine {
 	//Forward Declaration
 	class Actor;

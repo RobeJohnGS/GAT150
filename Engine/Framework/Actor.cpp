@@ -1,9 +1,25 @@
 #include "Actor.h"
+//include renderer component
 
 namespace JREngine
 {
 	void Actor::Draw(Renderer& renderer)
 	{
-		m_model.Draw(renderer, transform_.position, transform_.rotation, transform_.scale);
+		for (auto& component : m_components) {
+			//auto renderComponent = dynamic_cast<RendererComponent*>(component.get());
+			//if (renderComponent){
+				//renderComponent->Draw(renderer);
+			//}
+		}
+	}
+
+	void Actor::AddComponent(std::unique_ptr<Component> component){
+		component->m_owner = this;
+	}
+
+	void Actor::Update() {
+		for (auto& component : m_components) {
+			component->Update();
+		}
 	}
 }

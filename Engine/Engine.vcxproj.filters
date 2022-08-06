@@ -31,6 +31,9 @@
     <Filter Include="Source Files\Audio">
       <UniqueIdentifier>{83240368-6002-4e08-8e42-9aa407f437c5}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Components">
+      <UniqueIdentifier>{7e6985b1-2e96-4c83-a48f-ce3000e24c63}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Math\MathUtils.cpp">
@@ -83,6 +86,9 @@
     </ClCompile>
     <ClCompile Include="Math\Color.cpp">
       <Filter>Source Files\Math</Filter>
+    </ClCompile>
+    <ClCompile Include="Components\PlayerComponent.cpp">
+      <Filter>Source Files\Components</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -148,6 +154,12 @@
     </ClInclude>
     <ClInclude Include="Core\Logger.h">
       <Filter>Source Files\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Components\PlayerComponent.h">
+      <Filter>Source Files\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Component.h">
+      <Filter>Source Files\Framework</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
