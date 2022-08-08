@@ -107,7 +107,8 @@ namespace JREngine
 	{
 		float length = Length();
 
-		return Vector2{ x / length, y / length };
+		//if length = 0, return 0, 0; else, return the normal one.
+		return (length == 0) ? Vector2::zero : Vector2{ x / length, y / length };
 	}
 
 	inline void Vector2::Normalize()

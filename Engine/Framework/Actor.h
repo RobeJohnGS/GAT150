@@ -19,6 +19,8 @@ namespace JREngine
 		virtual void Draw(Renderer& renderer);
 
 		void AddComponent(std::unique_ptr<Component> component);
+		template<typename T>
+		T* GetComponent();
 
 		virtual void OnCollision(Actor* other){}
 		
@@ -32,6 +34,7 @@ namespace JREngine
 		}
 
 		friend class Scene;
+		friend class Component;
 
 		bool m_destroy = false;
 
@@ -47,4 +50,17 @@ namespace JREngine
 		std::vector<std::unique_ptr<Component>> m_components;
 
 	};
+
+	template<typename T>
+	inline T* Actor::GetComponent()
+	{
+		for (auto& components : m_components) {
+			T* result = dynamic_cast<T*>(components.get());
+			if (result) {
+				return result;
+			}
+		}
+
+		return nullptr;
+	}
 }

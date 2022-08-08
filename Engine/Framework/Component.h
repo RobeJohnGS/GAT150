@@ -2,6 +2,8 @@
 #include "GameObject.h"
 
 namespace JREngine {
+	class Actor;
+
 	class Component : public GameObject {
 	public:
 		Component() = default;

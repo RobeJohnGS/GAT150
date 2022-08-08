@@ -7,6 +7,7 @@ namespace JREngine {
 	//Forward Declaration
 	class Actor;
 	class Renderer;
+	class Game;
 
 	class Scene {
 	public:
@@ -20,6 +21,10 @@ namespace JREngine {
 
 		template<typename T>
 		T* GetActor();
+
+		Game* GetGame() {
+			//fill with code
+		}
 
 	private:
 		std::list<std::unique_ptr<Actor>> m_actors;
