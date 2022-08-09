@@ -19,6 +19,9 @@ namespace JREngine
 
 		//Functions
 		void Set(float x, float y) { this->x = x, this->y = y; }
+		float operator [] (size_t index) const {return (&x) [ index ]; }
+		float& operator [] (size_t index) {return (&x) [ index ]; }
+
 		Vector2 Add(const Vector2& v) { return Vector2{ v.x + x, v.y + y }; }
 
 		float LengthSqr();
@@ -108,7 +111,7 @@ namespace JREngine
 		float length = Length();
 
 		//if length = 0, return 0, 0; else, return the normal one.
-		return (length == 0) ? Vector2::zero : Vector2{ x / length, y / length };
+		return (length == 0) ? Vector2{0, 0} : Vector2{ x / length, y / length };
 	}
 
 	inline void Vector2::Normalize()

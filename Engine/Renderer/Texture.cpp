@@ -26,7 +26,7 @@ namespace JREngine {
 			return false;
 		}
 
-		SDL_FreeSurface(surface);
+		//SDL_FreeSurface(surface);
 
 		return true;
 	}

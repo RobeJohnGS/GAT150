@@ -30,8 +30,8 @@ int main()
 	actor->AddComponent(std::move(playerComponent));
 	//Sprite component
 	std::unique_ptr<JREngine::SpriteComponent> sprComponent = std::make_unique<JREngine::SpriteComponent>();
-	actor->AddComponent(std::move(sprComponent));
 	sprComponent->texture_ = texture;
+	actor->AddComponent(std::move(sprComponent));
 	//Audio component
 	std::unique_ptr<JREngine::AudioComponent> acomponent = std::make_unique<JREngine::AudioComponent>();
 	actor->AddComponent(std::move(acomponent));
