@@ -7,12 +7,13 @@ namespace JREngine {
 		Vector2 direction = Vector2::zero;
 		if (JREngine::inputSystem_g.GetKeyState(key_A) == JREngine::InputSystem::Held) {
 			//m_owner->transform_.position += {-10, 0};
-			direction = Vector2::left;
+			//direction = Vector2::left;
 			m_owner->transform_.rotation += 100 * time_g.deltaTime;
 		}
 
 		if (JREngine::inputSystem_g.GetKeyState(key_D) == JREngine::InputSystem::Held) {
 			//m_owner->transform_.position += {10, 0};
+			//direction = Vector2::right;
 			m_owner->transform_.rotation -= 100 * time_g.deltaTime;
 		}
 
@@ -32,8 +33,8 @@ namespace JREngine {
 			Vector2 force = Vector2::Rotate({ 1, 0 }, Math::DegToRad(m_owner->transform_.rotation)) * thrust;
 			component->ApplyForce(force);
 
-			force = (Vector2{ 400, 300 } - m_owner->transform_.position).Normalized() * 60.0f;
-			component->ApplyForce(force);
+			/*force = (Vector2{ 400, 300 } - m_owner->transform_.position).Normalized() * 60.0f;
+			component->ApplyForce(force);*/
 		}
 
 		m_owner->transform_.position += direction * 300 * time_g.deltaTime;

@@ -62,7 +62,8 @@ int main()
 		// Render
 		JREngine::renderer_g.BeginFrame();
 
-		JREngine::renderer_g.Draw(texture, { 400, 300 }, angle, { 2.0f, 2.0f }, { 0.5f, 0.5f });
+		//JREngine::renderer_g.Draw(texture, { 400, 300 }, angle, { 2.0f, 2.0f }, { 0.5f, 0.5f });
+		scene.Draw(JREngine::renderer_g);
 
 		JREngine::renderer_g.EndFrame();
 	}
