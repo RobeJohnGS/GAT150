@@ -11,6 +11,16 @@ namespace JREngine
 				renderComponent->Draw(renderer);
 			}
 		}
+
+		for (auto& child : m_children) {
+			child->Draw(renderer);
+		}
+	}
+
+	void Actor::AddChild(std::unique_ptr<Actor> child){
+		child->m_parent = this;
+		child->m_scene = this->m_scene;
+		m_children.push_back(child);
 	}
 
 	void Actor::AddComponent(std::unique_ptr<Component> component){
@@ -23,5 +33,18 @@ namespace JREngine
 		for (auto& component : m_components) {
 			component->Update();
 		}
+
+		for (auto& child : m_children) {
+			child->Update();
+		}
+
+		if (m_parent != nullptr) {
+			transform_.Update(m_parent->transform_.matrix);
+		}
+		else {
+			transform_.Update();
+		}
+
+		transform_.Update();
 	}
 }

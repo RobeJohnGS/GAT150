@@ -8,13 +8,13 @@ namespace JREngine {
 		if (JREngine::inputSystem_g.GetKeyState(key_A) == JREngine::InputSystem::Held) {
 			//m_owner->transform_.position += {-10, 0};
 			//direction = Vector2::left;
-			m_owner->transform_.rotation += 100 * time_g.deltaTime;
+			m_owner->transform_.rotation -= 100 * time_g.deltaTime;
 		}
 
 		if (JREngine::inputSystem_g.GetKeyState(key_D) == JREngine::InputSystem::Held) {
 			//m_owner->transform_.position += {10, 0};
 			//direction = Vector2::right;
-			m_owner->transform_.rotation -= 100 * time_g.deltaTime;
+			m_owner->transform_.rotation += 100 * time_g.deltaTime;
 		}
 
 		float thrust = 0;

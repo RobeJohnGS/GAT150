@@ -12,8 +12,8 @@ namespace JREngine {
 		Vector3 operator [] (size_t index) const { return rows[index]; }
 		Vector3& operator [] (size_t index) { return rows[index]; }
 
-		Vector2 operator * (const Vector2& v);
-		Matrix3x3 operator * (const Matrix3x3& mx);
+		Vector2 operator * (const Vector2& v) const;
+		Matrix3x3 operator * (const Matrix3x3& mx) const;
 
 		static Matrix3x3 CreateScale(const Vector2& scale);
 		static Matrix3x3 CreateScale(float scale);
@@ -34,7 +34,7 @@ namespace JREngine {
 		rows[2] = row3;
 	}
 
-	inline Vector2 Matrix3x3::operator*(const Vector2& v) {
+	inline Vector2 Matrix3x3::operator*(const Vector2& v) const {
 		Vector2 result;
 		result.x = v.x * rows[0][0] + v.y * rows[0][1] + 1.0f * rows[0][2];
 		result.y = v.x * rows[1][0] + v.y * rows[1][1] + 1.0f * rows[1][2];
@@ -42,7 +42,7 @@ namespace JREngine {
 		return result;
 	}
 
-	inline Matrix3x3 Matrix3x3::operator*(const Matrix3x3& mx) {
+	inline Matrix3x3 Matrix3x3::operator*(const Matrix3x3& mx) const {
 		Matrix3x3 result;
 		//row 1
 		result[0][0] = rows[0][0] * mx[0][0] + rows[0][1] * mx[1][0] + rows[0][2] * mx[2][0];

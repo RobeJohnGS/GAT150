@@ -19,25 +19,43 @@ int main()
 	JREngine::renderer_g.CreateWindow("Engine", 800, 600); // Creates the window with parameters
 	JREngine::renderer_g.SetClearColor(JREngine::Color{ 0, 0, 0, 255 });
 	
+	//load assets
+	//Texture
 	std::shared_ptr<JREngine::Texture> texture = std::make_shared<JREngine::Texture>();
 	texture->Create(JREngine::renderer_g, "Sprites/spaceShips_004.png");
-	float angle = 0;
+	//Model
+	std::shared_ptr<JREngine::Model> model = std::make_shared<JREngine::Model>();
+	model->Create("Text-Models/Player.txt");
 
+	//Scene & actor component
 	JREngine::Scene scene;
-	std::unique_ptr<JREngine::Actor> actor = std::make_unique<JREngine::Actor>();
+	JREngine::Transform transform{ JREngine::Vector2{400, 300}, 90, {3, 3} };
+	std::unique_ptr<JREngine::Actor> actor = std::make_unique<JREngine::Actor>(transform);
 	//Player component
 	std::unique_ptr<JREngine::PlayerComponent> playerComponent = std::make_unique<JREngine::PlayerComponent>();
 	actor->AddComponent(std::move(playerComponent));
 	//Sprite component
-	std::unique_ptr<JREngine::SpriteComponent> sprComponent = std::make_unique<JREngine::SpriteComponent>();
+	/*std::unique_ptr<JREngine::SpriteComponent> sprComponent = std::make_unique<JREngine::SpriteComponent>();
 	sprComponent->texture_ = texture;
-	actor->AddComponent(std::move(sprComponent));
+	actor->AddComponent(std::move(sprComponent));*/
+	//Model Component
+	std::unique_ptr<JREngine::ModelComponent> modelComponent = std::make_unique<JREngine::ModelComponent>();
+	modelComponent->m_model = model;
+	actor->AddComponent(std::move(modelComponent));
 	//Audio component
 	std::unique_ptr<JREngine::AudioComponent> acomponent = std::make_unique<JREngine::AudioComponent>();
 	actor->AddComponent(std::move(acomponent));
 	//Physics component
 	std::unique_ptr<JREngine::PhysicsComponent> phcomponent = std::make_unique<JREngine::PhysicsComponent>();
 	actor->AddComponent(std::move(phcomponent));
+	//Child component
+	JREngine::Transform transformC{ JREngine::Vector2{40, 30}, 0, {1, 1} };
+	std::unique_ptr<JREngine::Actor> child = std::make_unique<JREngine::Actor>(transformC);
+	//Child Model
+	std::unique_ptr<JREngine::ModelComponent> modelComponentC = std::make_unique<JREngine::ModelComponent>();
+	modelComponentC->m_model = model;
+	child->AddComponent(std::move(modelComponentC));
+	actor->AddChild(std::move(child));
 
 	scene.Add(move(actor));
 
@@ -63,7 +81,7 @@ int main()
 		JREngine::renderer_g.BeginFrame();
 
 		//JREngine::renderer_g.Draw(texture, { 400, 300 }, angle, { 2.0f, 2.0f }, { 0.5f, 0.5f });
-		scene.Draw(JREngine::renderer_g);
+		//scene.Draw(JREngine::renderer_g);
 
 		JREngine::renderer_g.EndFrame();
 	}

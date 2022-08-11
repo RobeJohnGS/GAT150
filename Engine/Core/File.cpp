@@ -1,4 +1,5 @@
 #include "File.h"
+#include "Logger.h"
 #include <filesystem>
 #include <fstream>
 
@@ -26,6 +27,7 @@ namespace JREngine {
 
 	bool ReadFile(const std::string& pathname, std::string& buffer){
 		if (!FileExists(pathname)) {
+			LOG("Error could not read file. %s", pathname.c_str());
 			return false;
 		}
 

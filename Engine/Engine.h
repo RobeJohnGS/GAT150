@@ -5,6 +5,7 @@
 
 #include "Components/PlayerComponent.h"
 #include "Components/SpriteComponent.h"
+#include "Components/ModelComponent.h"
 #include "Components/AudioComponent.h"
 #include "Components/PhysicsComponent.h"
 
@@ -13,6 +14,8 @@
 #include "Renderer/Renderer.h"
 #include "Renderer/Text.h"
 #include "Renderer/Font.h"
+#include "Renderer/Texture.h"
+#include "Renderer/Model.h"
 
 #include "Math/MathUtils.h"
 #include "Math/Random.h"
