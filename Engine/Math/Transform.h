@@ -21,7 +21,7 @@ namespace JREngine
 
 		operator Matrix3x3 () const {
 			Matrix3x3 mxScale = Matrix3x3::CreateScale(scale);
-			//Matrix3x3 mxRotation = Matrix3x3::CreateRotation(Math::DegToRad();
+			Matrix3x3 mxRotation = Matrix3x3::CreateRotation(Math::DegToRad(rotation));
 			Matrix3x3 mxTranslation = Matrix3x3::CreateTranslation(position);
 		}
 	};
