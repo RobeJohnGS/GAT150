@@ -82,7 +82,7 @@ namespace JREngine
 		std::cout << m_radius << std::endl;
 	}
 
-	bool Model::Create(const std::string& filename) {
+	bool Model::Create(const std::string& filename, void* data) {
 		if (!Load(filename)){
 			LOG("Error could not create model.");
 			return false;

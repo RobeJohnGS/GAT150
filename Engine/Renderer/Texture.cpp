@@ -11,8 +11,13 @@ namespace JREngine {
 		}
 	}
 
-	bool Texture::Create(Renderer& renderer, const std::string& filename)
-	{
+	bool Texture::Create(const std::string& filename, void* data){
+		//(Renderer*)(data);
+		Renderer* renderer = static_cast<Renderer*>(data);
+		return Create(*renderer, filename);
+	}
+
+	bool Texture::Create(Renderer& renderer, const std::string& filename){
 		SDL_Surface* surface = IMG_Load(filename.c_str());
 		if (surface == nullptr) {
 			LOG(SDL_GetError());

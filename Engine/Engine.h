@@ -23,6 +23,7 @@
 #include "Framework/Scene.h"
 #include "Framework/Game.h"
 
+#include "Resource/ResourceManager.h"
 
 #include "Audio/AudioSystem.h"
 
@@ -38,4 +39,6 @@ namespace JREngine
 	extern Time time_g;
 	
 	extern AudioSystem audioSystem_g;
+
+	extern ResourceManager resourceManager_g;
 }

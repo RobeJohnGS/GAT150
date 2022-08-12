@@ -1,5 +1,6 @@
 #pragma once
 #include "Math/Vector2.h"
+#include "Resource/Resource.h"
 #include <string>
 //Not supposed to be here
 //#include "Renderer/Renderer.h"
@@ -9,11 +10,12 @@ struct SDL_Texture;
 
 namespace JREngine {
 	class Renderer;
-	class Texture {
+	class Texture : public Resource {
 	public:
 		Texture() = default;
 		~Texture();
 
+		bool Create(const std::string& filename, void* data = nullptr) override;
 		bool Create(Renderer& renderer, const std::string& filename);
 
 		Vector2 GetSize() const;

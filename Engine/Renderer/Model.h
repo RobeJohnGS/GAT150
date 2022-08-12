@@ -1,11 +1,12 @@
 #pragma once
 #include "Renderer.h"
+#include "Resource/Resource.h"
 #include <vector>
 #include <string>
 
 namespace JREngine
 {
-	class Model
+	class Model : public Resource
 	{
 
 	public:
@@ -14,7 +15,7 @@ namespace JREngine
 		Model(const std::vector<Vector2>& points, const Color& color) : points_{ points }, color_{ color }{}
 		Model(const std::string& filename);
 
-		bool Create(const std::string& filename);
+		bool Create(const std::string& filename, void* data);
 
 		void Draw(Renderer& renderer, const Vector2& position, float angle, const Vector2& scale = Vector2{ 1, 1 });
 		void Draw(Renderer& renderer, const Transform& transform);

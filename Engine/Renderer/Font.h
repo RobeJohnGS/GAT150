@@ -4,6 +4,7 @@
 
 struct _TTF_Font;
 
+//Make font a resource
 namespace JREngine {
 	class Font {
 	public:
@@ -11,6 +12,9 @@ namespace JREngine {
 		Font(const std::string& filename, int fontSize);
 		~Font();
 
+		bool Create(const std::string& filename) {
+			return false;
+		}
 		void Load(const std::string& filename, int fontSize);
 
 		friend class Text;

@@ -8,4 +8,6 @@ namespace JREngine
 	Time time_g;
 
 	AudioSystem audioSystem_g;
+
+	ResourceManager resourceManager_g;
 }
