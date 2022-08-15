@@ -17,11 +17,12 @@ namespace JREngine
 		}
 	}
 
-	void Actor::AddChild(std::unique_ptr<Actor> child){
+	//add child broken
+	/*void Actor::AddChild(std::unique_ptr<Actor> child){
 		child->m_parent = this;
 		child->m_scene = this->m_scene;
 		m_children.push_back(child);
-	}
+	}*/
 
 	void Actor::AddComponent(std::unique_ptr<Component> component){
 		component->m_owner = this;

@@ -1,6 +1,8 @@
 #pragma once
 #include "Math/Transform.h"
 
+#define REGISTER_CLASS(class) Factory::Instance().Register<class>(#class)
+
 namespace JREngine
 {
 	class GameObject
@@ -8,13 +10,7 @@ namespace JREngine
 	public:
 
 		GameObject() = default;
-		//GameObject(const Transform& transform) : transform_{ transform } {}
 
 		virtual void Update() = 0;
-
-		//Transform& GetTransform() { return transform_; }
-
-		//Transform transform_;
-
 	};
 }

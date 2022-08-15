@@ -22,6 +22,8 @@
 
 #include "Framework/Scene.h"
 #include "Framework/Game.h"
+#include "Framework/Singleton.h"
+#include "Framework/Factory.h"
 
 #include "Resource/ResourceManager.h"
 
@@ -41,4 +43,9 @@ namespace JREngine
 	extern AudioSystem audioSystem_g;
 
 	extern ResourceManager resourceManager_g;
+
+	class Engine : public Singleton<Engine>{
+	public:
+		void Register();
+	};
 }

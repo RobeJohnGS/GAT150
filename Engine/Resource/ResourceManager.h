@@ -21,13 +21,14 @@ namespace JREngine {
 	template<typename T>
 	inline std::shared_ptr<T> ResourceManager::Get(const std::string& name, void* data)
 	{
-		if (m_resources.find(name)) {
-			//found
+		if (m_resources.find(name) != m_resources.end()) {
 			return std::dynamic_pointer_cast<T>(m_resources[name]);
 		}else{
 			std::shared_ptr<T> resource = std::make_shared<T>();
 			resource->Create(name, data);
 			m_resources[name] = resource;
+
+			return resource;
 		}
 
 		return std::shared_ptr<T>();

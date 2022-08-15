@@ -18,7 +18,8 @@ namespace JREngine
 		virtual void Update() override;
 		virtual void Draw(Renderer& renderer);
 
-		void AddChild(std::unique_ptr<Actor> child);
+		//Add child broken
+		//void AddChild(std::unique_ptr<Actor> child);
 		void AddComponent(std::unique_ptr<Component> component);
 		template<typename T>
 		T* GetComponent();
