@@ -5,6 +5,6 @@ namespace JREngine {
 	}
 
 	void ResourceManager::Shutdown(){
-
+		m_resources.clear();
 	}
 }

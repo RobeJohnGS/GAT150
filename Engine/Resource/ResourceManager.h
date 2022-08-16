@@ -8,6 +8,7 @@ namespace JREngine {
 	class ResourceManager {
 	public:
 		ResourceManager() = default;
+		~ResourceManager() = default;
 
 		void Initialize();
 		void Shutdown();

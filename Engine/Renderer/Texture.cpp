@@ -12,9 +12,14 @@ namespace JREngine {
 	}
 
 	bool Texture::Create(const std::string& filename, void* data){
-		//(Renderer*)(data);
+		/*(Renderer*)(data);
 		Renderer* renderer = static_cast<Renderer*>(data);
-		return Create(*renderer, filename);
+		return Create(*renderer, filename);*/
+		va_list args;
+		va_start(args, filename);
+		Renderer& renderer = va_arg(args, Renderer);
+		va_end(args);
+		return Create(renderer, filename);
 	}
 
 	bool Texture::Create(Renderer& renderer, const std::string& filename){
