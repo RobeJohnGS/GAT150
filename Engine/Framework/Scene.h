@@ -9,7 +9,8 @@ namespace JREngine {
 	class Renderer;
 	class Game;
 
-	class Scene {
+	class Scene /*: public ISerializable*/ {
+	//Implement all pure virtuals
 	public:
 		Scene() = default;
 		~Scene() = default;

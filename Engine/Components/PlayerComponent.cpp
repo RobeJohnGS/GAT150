@@ -20,6 +20,7 @@ namespace JREngine {
 		float thrust = 0;
 		if (JREngine::inputSystem_g.GetKeyState(key_W) == JREngine::InputSystem::Held) {
 			//m_owner->transform_.position += {0, -10};
+			//thrust = speed;
 			thrust = 100;
 		}
 
@@ -46,4 +47,11 @@ namespace JREngine {
 			}
 		}
 	}
+
+	/*
+	bool PlayerComponent::Read(blach){
+		READ_DATA(value, speed);
+		return true
+	}
+	*/
 }

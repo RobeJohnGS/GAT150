@@ -17,6 +17,14 @@ int main()
 	
 	JREngine::renderer_g.CreateWindow("Engine", 800, 600); // Creates the window with parameters
 	JREngine::renderer_g.SetClearColor(JREngine::Color{ 0, 0, 0, 255 });
+
+	//Scene creation
+	JREngine::Scene scene;
+
+	//rapidjson::Document document;
+	//bool success = JREngine::json::Load(
+
+	//Scene.Read(document);
 	
 	//load assets
 	//Texture
@@ -29,8 +37,7 @@ int main()
 	//Audio
 	JREngine::audioSystem_g.AddAudio("lazer", "Audio/temp-lazer.wav");
 
-	//Scene & actor component
-	JREngine::Scene scene;
+	//actor component
 	JREngine::Transform transform{ JREngine::Vector2{400, 300}, 90, {3, 3} };
 	//std::unique_ptr<JREngine::Actor> actor = std::make_unique<JREngine::Actor>(transform);
 	std::unique_ptr <JREngine::Actor> actor = JREngine::Factory::Instance().Create<JREngine::Actor>("Actor");

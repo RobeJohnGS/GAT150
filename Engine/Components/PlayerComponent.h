@@ -8,5 +8,7 @@ namespace JREngine {
 		~PlayerComponent() = default;
 
 		void Update() override;
+
+		float speed = 0.0f;
 	};
 }

@@ -3,16 +3,24 @@
 #include "Mat2_2.h"
 #include "Mat3_3.h"
 #include "MathUtils.h"
+//#include "Serialization/Serializable.h"
 
 namespace JREngine
 {
-	struct Transform
-	{
+	struct Transform /*: public ISerializable*/{
+		//create all virtual funtions then move read and write at the top above update;
 		Vector2 position;
 		float rotation{ 0 };
 		Vector2 scale{ 1, 1 };
 
 		Matrix3x3 matrix;
+
+		Transform(const Vector2& position, float rotation, const Vector2& scale) :
+			position{ position },
+			rotation{ rotation },
+			scale{ scale }
+		{}
+
 		void Update() {
 			Matrix3x3 mxScale = Matrix3x3::CreateScale(scale);
 			Matrix3x3 mxRotation = Matrix3x3::CreateRotation(Math::DegToRad(rotation));

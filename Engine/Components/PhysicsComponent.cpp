@@ -3,10 +3,10 @@
 
 namespace JREngine {
 	void PhysicsComponent::Update(){
-		m_velocity += m_acceleration * time_g.deltaTime;
-		m_owner->transform_.position += m_velocity * time_g.deltaTime;
-		m_velocity *= m_damping;
+		velocity += acceleration * time_g.deltaTime;
+		m_owner->transform_.position += velocity * time_g.deltaTime;
+		velocity *= m_damping;
 
-		m_acceleration = Vector2::zero;
+		acceleration = Vector2::zero;
 	}
 }

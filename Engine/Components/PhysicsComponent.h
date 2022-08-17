@@ -11,12 +11,12 @@ namespace JREngine {
 		void Update() override;
 
 		void ApplyForce(const Vector2& force) {
-			m_acceleration += force;
+			acceleration += force;
 		}
 
 		//Variables
-		Vector2 m_velocity;
-		Vector2 m_acceleration;
+		Vector2 velocity;
+		Vector2 acceleration;
 
 		float m_damping = 1;
 	};

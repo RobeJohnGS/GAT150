@@ -1,6 +1,7 @@
 #pragma once
 #include "GameObject.h"
 #include "Component.h"
+#include "Math/Transform.h"
 #include <vector>
 
 namespace JREngine
@@ -8,8 +9,8 @@ namespace JREngine
 	class Scene;
 	class Renderer;
 
-	class Actor : public GameObject
-	{
+	class Actor : public GameObject/*, public ISeriablizable*/{
+	//implement pure virtuals then move them below update
 	public:
 		Actor() = default;
 		//Actor(const Model& model, const Transform& transform) : GameObject{ transform }, m_model{ model }  {}
@@ -31,9 +32,19 @@ namespace JREngine
 			return 0;
 		}
 		
-		std::string& GetTag() {
-			return m_tag;
+		const std::string& GetTag() {
+			return tag;
 		}
+		void SetTag(const std::string& tag) {
+			this->tag = tag;
+		}
+
+		/*const std::string& GetName() {
+			return name;
+		}
+		void SetTag(const std::string& name) {
+			this->name = name;
+		}*/
 
 		friend class Scene;
 		friend class Component;
@@ -42,7 +53,8 @@ namespace JREngine
 
 		Transform transform_;
 	protected:
-		std::string m_tag;
+		//std::string name;
+		std::string tag;
 
 		Vector2 m_velocity;
 		float m_damping = 1;

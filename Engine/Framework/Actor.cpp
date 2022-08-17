@@ -1,4 +1,5 @@
 #include "Actor.h"
+#include "Factory.h"
 #include "Components/RendererComponent.h"
 
 namespace JREngine
@@ -48,4 +49,31 @@ namespace JREngine
 
 		transform_.Update();
 	}
+
+	/*
+		bool Actor::Write(const rapidjson::Value& value) const {
+			
+		}
+
+		bool Actor::Read(const rapidjson::Value& value) {
+			READ_DATA(value, tag);
+			READ_DATA(value, name);
+			
+			m_transform.Read(value["transform"]);
+
+			if (value.HasMember("component") && value["components"].isArray()){
+				for (auto& componentValue : value["components"].GetArray()){
+					std::string type;
+					READ_DATA(componentValue, type);
+
+					auto component = Factory::Instance().Create<Component>(type);
+					if (component){
+						component->Read(componentValue);
+						AddComponent(std::move(component));
+					}
+				}
+			}
+			return true;
+		}
+	*/
 }
