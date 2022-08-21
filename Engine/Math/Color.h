@@ -13,6 +13,9 @@ namespace JREngine {
 		uint8_t b;
 		uint8_t a;
 
+		uint8_t operator [](size_t index) const { return (&r)[index]; }
+		uint8_t& operator [] (size_t index) { return(&r)[index]; }
+
 		static const Color white;
 		static const Color black;
 		static const Color red;
@@ -20,6 +23,7 @@ namespace JREngine {
 		static const Color blue;
 
 		friend std::istream& operator >> (std::istream& stream, Color& color);
+		friend std::ostream& operator << (std::ostream& stream, Color& c);
 	};
 
 	inline std::istream& operator >> (std::istream& stream, Color& color)
@@ -47,6 +51,13 @@ namespace JREngine {
 
 		// default alpha to 255 
 		color.a = 255;
+
+		return stream;
+	}
+
+	std::ostream& operator<<(std::ostream& stream, Color& c)
+	{
+		stream << (int)c.r << " " << (int)c.g << " " << (int)c.b << " " << (int)c.a;
 
 		return stream;
 	}

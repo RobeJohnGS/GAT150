@@ -1,9 +1,27 @@
 #include "Actor.h"
-#include "Factory.h"
 #include "Components/RendererComponent.h"
+#include "Factory.h"
 
 namespace JREngine
 {
+
+	void Actor::Update() {
+		for (auto& component : m_components) {
+			component->Update();
+		}
+
+		for (auto& child : m_children) {
+			child->Update();
+		}
+
+		if (m_parent) {
+			m_transform.Update(m_parent->m_transform.matrix);
+		}
+		else {
+			m_transform.Update();
+		}
+	}
+
 	void Actor::Draw(Renderer& renderer)
 	{
 		for (auto& component : m_components) {
@@ -19,11 +37,11 @@ namespace JREngine
 	}
 
 	//add child broken
-	/*void Actor::AddChild(std::unique_ptr<Actor> child){
+	void Actor::AddChild(std::unique_ptr<Actor> child){
 		child->m_parent = this;
-		child->m_scene = this->m_scene;
-		m_children.push_back(child);
-	}*/
+		child->m_scene = m_scene;
+		m_children.push_back(std::move(child));
+	}
 
 	void Actor::AddComponent(std::unique_ptr<Component> component){
 		component->m_owner = this;
@@ -31,24 +49,33 @@ namespace JREngine
 		m_components.push_back(std::move(component));
 	}
 
-	void Actor::Update() {
-		for (auto& component : m_components) {
-			component->Update();
-		}
-
-		for (auto& child : m_children) {
-			child->Update();
-		}
-
-		if (m_parent != nullptr) {
-			transform_.Update(m_parent->transform_.matrix);
-		}
-		else {
-			transform_.Update();
-		}
-
-		transform_.Update();
+	bool Actor::Write(const rapidjson::Value& value) const
+	{
+		return true;
 	}
+
+	bool Actor::Read(const rapidjson::Value& value)
+	{
+		READ_DATA(value, tag);
+		READ_DATA(value, name);
+
+		m_transform.Read(value["transform"]);
+
+		if (value.HasMember("component") && value["components"].IsArray()) {
+			for (auto& componentValue : value["components"].GetArray()) {
+				std::string type;
+				READ_DATA(componentValue, type);
+
+				auto component = Factory::Instance().Create<Component>(type);
+				if (component) {
+					component->Read(componentValue);
+					AddComponent(std::move(component));
+				}
+			}
+		}
+		return true;
+	}
+
 
 	/*
 		bool Actor::Write(const rapidjson::Value& value) const {
@@ -57,23 +84,27 @@ namespace JREngine
 
 		bool Actor::Read(const rapidjson::Value& value) {
 			READ_DATA(value, tag);
-			READ_DATA(value, name);
-			
-			m_transform.Read(value["transform"]);
+		READ_DATA(value, name);
 
-			if (value.HasMember("component") && value["components"].isArray()){
-				for (auto& componentValue : value["components"].GetArray()){
-					std::string type;
-					READ_DATA(componentValue, type);
+		m_transform.Read(value["actors"]);
 
-					auto component = Factory::Instance().Create<Component>(type);
-					if (component){
-						component->Read(componentValue);
-						AddComponent(std::move(component));
-					}
+		if (!(value.HasMember("actors")) || !value["actors"].IsArray())
+		{
+			for (auto& componentValue : value["components"].GetArray())
+			{
+				std::string type;
+				READ_DATA(componentValue, type);
+
+				auto component = Factory::Instance().Create<Component>(type);
+				if (component)
+				{
+					component->Read(componentValue);
+					AddComponent(std::move(component));
 				}
 			}
-			return true;
+		}
+
+		return true;
 		}
 	*/
 }

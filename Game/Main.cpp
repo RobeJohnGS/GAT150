@@ -8,6 +8,18 @@ int main()
 
 	JREngine::SetFilePath("../Assets");
 
+	rapidjson::Document document;
+	bool success = JREngine::json::Load("json.txt", document);
+	assert(success);
+
+	int i1;
+	JREngine::json::Get(document, "integer1", i1);
+	std::cout << i1 << std::endl;
+
+	int i2;
+	JREngine::json::Get(document, "integer2", i2);
+	std::cout << i2 << std::endl;
+
 	JREngine::renderer_g.Initialize();
 	JREngine::inputSystem_g.Initialize();
 	JREngine::audioSystem_g.Initialize();
@@ -41,7 +53,7 @@ int main()
 	JREngine::Transform transform{ JREngine::Vector2{400, 300}, 90, {3, 3} };
 	//std::unique_ptr<JREngine::Actor> actor = std::make_unique<JREngine::Actor>(transform);
 	std::unique_ptr <JREngine::Actor> actor = JREngine::Factory::Instance().Create<JREngine::Actor>("Actor");
-	actor->transform_ = transform;
+	actor->m_transform = transform;
 	//Player component
 	std::unique_ptr<JREngine::Component> playerComponent = JREngine::Factory::Instance().Create<JREngine::Component>("Player");
 	actor->AddComponent(std::move(playerComponent));

@@ -1,5 +1,6 @@
 #pragma once
 #include <string>
+
 namespace JREngine {
 	void SetFilePath(const std::string& pathname);
 	std::string GetFilePath();

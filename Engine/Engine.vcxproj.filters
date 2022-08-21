@@ -233,5 +233,11 @@
     <ClInclude Include="Serialization\JSON.h">
       <Filter>Source Files\Serialization</Filter>
     </ClInclude>
+    <ClInclude Include="Serialization\Serializable.h">
+      <Filter>Source Files\Serialization</Filter>
+    </ClInclude>
+    <ClInclude Include="Math\Rect.h">
+      <Filter>Source Files\Math</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

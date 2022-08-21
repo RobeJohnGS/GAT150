@@ -40,9 +40,9 @@ namespace JREngine {
 	inline Matrix2x2 Matrix2x2::operator*(const Matrix2x2& mx){
 		Matrix2x2 result;
 		result[0][0] = rows[0][0] * mx[0][0] + rows[0][1] * mx[1][0];
-		result[0][1] = rows[0][0] * mx[0][1] + rows[0][1] * mx[1][1];
-		result[1][0] = rows[1][0] * mx[0][0] + rows[1][1] * mx[1][0];
-		result[1][1] = rows[1][0] * mx[0][1] + rows[1][1] * mx[1][1];
+		result[0][1] = rows[0][1] * mx[1][0] + rows[1][1] * mx[1][1];
+		result[1][0] = rows[0][0] * mx[0][0] + rows[0][1] * mx[1][0];
+		result[1][1] = rows[0][0] * mx[0][0] + rows[0][1] * mx[1][0];
 
 		return result;
 	}

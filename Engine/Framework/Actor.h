@@ -1,26 +1,30 @@
 #pragma once
 #include "GameObject.h"
 #include "Component.h"
-#include "Math/Transform.h"
 #include <vector>
 
 namespace JREngine
 {
 	class Scene;
+	class Component;
 	class Renderer;
 
-	class Actor : public GameObject/*, public ISeriablizable*/{
-	//implement pure virtuals then move them below update
+	class Actor : public GameObject, public ISerializable{
 	public:
 		Actor() = default;
 		//Actor(const Model& model, const Transform& transform) : GameObject{ transform }, m_model{ model }  {}
-		Actor(const Transform& transform) : transform_{ transform } {}
+		Actor(const Transform& transform) : m_transform{ transform } {}
 
 		virtual void Update() override;
 		virtual void Draw(Renderer& renderer);
 
+		// Inherited via ISerializable
+		virtual bool Write(const rapidjson::Value& value) const override;
+
+		virtual bool Read(const rapidjson::Value& value) override;
+
 		//Add child broken
-		//void AddChild(std::unique_ptr<Actor> child);
+		void AddChild(std::unique_ptr<Actor> child);
 		void AddComponent(std::unique_ptr<Component> component);
 		template<typename T>
 		T* GetComponent();
@@ -39,21 +43,21 @@ namespace JREngine
 			this->tag = tag;
 		}
 
-		/*const std::string& GetName() {
+		const std::string& GetName() {
 			return name;
 		}
-		void SetTag(const std::string& name) {
+		void SetName(const std::string& name) {
 			this->name = name;
-		}*/
+		}
 
 		friend class Scene;
 		friend class Component;
 
 		bool m_destroy = false;
 
-		Transform transform_;
+		Transform m_transform;
 	protected:
-		//std::string name;
+		std::string name;
 		std::string tag;
 
 		Vector2 m_velocity;
@@ -65,7 +69,6 @@ namespace JREngine
 
 		std::vector<std::unique_ptr<Component>> m_components;
 		std::vector<std::unique_ptr<Actor>> m_children;
-
 	};
 
 	template<typename T>

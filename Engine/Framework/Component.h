@@ -4,16 +4,16 @@
 namespace JREngine {
 	class Actor;
 
-	class Component : public GameObject /*, public ISeriablizable*/ {
+	class Component : public GameObject , public ISerializable {
 	//Go through each component header and impliment the virtual funtions
 	public:
 		Component() = default;
 		~Component() = default;
 
-		//virtual void Update() = 0;
+		virtual void Update() = 0;
 
 		friend class Actor;
-	protected:
+
 		Actor* m_owner = nullptr;
 	};
 }

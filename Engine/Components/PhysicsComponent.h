@@ -9,6 +9,8 @@ namespace JREngine {
 		~PhysicsComponent() = default;
 
 		void Update() override;
+		bool Write(const rapidjson::Value& value) const;
+		bool Read(const rapidjson::Value& value);
 
 		void ApplyForce(const Vector2& force) {
 			acceleration += force;

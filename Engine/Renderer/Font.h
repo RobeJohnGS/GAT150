@@ -1,4 +1,5 @@
 #pragma once
+#include "Resource/Resource.h"
 #include <string>
 //#include <SDL_ttf.h>
 
@@ -12,11 +13,11 @@ namespace JREngine {
 		Font(const std::string& filename, int fontSize);
 		~Font();
 
-		bool Create(const std::string& filename, void* data = nullptr) override;
+		bool Create(const std::string& filename, ...) override;
 		bool Create(const std::string& filename) {
 			return false;
 		}
-		void Load(const std::string& filename, int fontSize);
+		bool Load(const std::string& filename, int fontSize);
 
 		friend class Text;
 	private:

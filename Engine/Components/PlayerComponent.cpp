@@ -1,5 +1,10 @@
 #include "PlayerComponent.h"
+#include "Renderer/Text.h"
+#include "Input/InputSystem.h"
 #include "Engine.h"
+#include "Framework/Actor.h"
+#include "PhysicsComponent.h"
+#include "AudioComponent.h"
 #include <iostream>
 
 namespace JREngine {
@@ -8,13 +13,13 @@ namespace JREngine {
 		if (JREngine::inputSystem_g.GetKeyState(key_A) == JREngine::InputSystem::Held) {
 			//m_owner->transform_.position += {-10, 0};
 			//direction = Vector2::left;
-			m_owner->transform_.rotation -= 100 * time_g.deltaTime;
+			m_owner->m_transform.rotation -= 100 * time_g.deltaTime;
 		}
 
 		if (JREngine::inputSystem_g.GetKeyState(key_D) == JREngine::InputSystem::Held) {
 			//m_owner->transform_.position += {10, 0};
 			//direction = Vector2::right;
-			m_owner->transform_.rotation += 100 * time_g.deltaTime;
+			m_owner->m_transform.rotation += 100 * time_g.deltaTime;
 		}
 
 		float thrust = 0;
@@ -24,21 +29,16 @@ namespace JREngine {
 			thrust = 100;
 		}
 
-
-		if (JREngine::inputSystem_g.GetKeyState(key_S) == JREngine::InputSystem::Held) {
-			//m_owner->transform_.position += {0, 10};
-		}
-
 		auto component = m_owner->GetComponent<PhysicsComponent>();
 		if (component) {
-			Vector2 force = Vector2::Rotate({ 1, 0 }, Math::DegToRad(m_owner->transform_.rotation)) * thrust;
+			Vector2 force = Vector2::Rotate({ 1, 0 }, Math::DegToRad(m_owner->m_transform.rotation)) * thrust;
 			component->ApplyForce(force);
 
 			/*force = (Vector2{ 400, 300 } - m_owner->transform_.position).Normalized() * 60.0f;
 			component->ApplyForce(force);*/
 		}
 
-		m_owner->transform_.position += direction * 300 * time_g.deltaTime;
+		//m_owner->transform_.position += direction * 300 * time_g.deltaTime;
 
 		if (inputSystem_g.GetKeyState(key_space) == InputSystem::Pressed) {
 			auto component = m_owner->GetComponent<AudioComponent>();
@@ -48,10 +48,15 @@ namespace JREngine {
 		}
 	}
 
-	/*
-	bool PlayerComponent::Read(blach){
-		READ_DATA(value, speed);
-		return true
+	bool PlayerComponent::Write(const rapidjson::Value& value) const
+	{
+		return true;
 	}
-	*/
+
+	bool PlayerComponent::Read(const rapidjson::Value& value)
+	{
+		READ_DATA(value, speed);
+
+		return true;
+	}
 }

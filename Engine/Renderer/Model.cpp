@@ -6,9 +6,25 @@
 
 #include <iostream>
 #include <sstream>
+#include <cstdarg>
 
 namespace JREngine
 {
+
+	Model::Model(const std::string& filename)
+	{
+		Load(filename);
+		m_radius = CalculateRadius();
+	}
+
+	bool Model::Create(const std::string& filename, ...) {
+		va_list args;
+		va_start(args, filename);
+		Renderer& renderer = va_arg(args, Renderer);
+		va_end(args);
+		return Create(filename, renderer);
+	}
+
 	void Model::Draw(Renderer& renderer, const Vector2& position, float angle, const Vector2& scale){
 
 		for (int i = 0; i < points_.size() - 1; i++)
@@ -73,23 +89,5 @@ namespace JREngine
 		}
 
 		return radius;
-	}
-
-	Model::Model(const std::string& filename)
-	{
-		Load(filename);
-		m_radius = CalculateRadius();
-		std::cout << m_radius << std::endl;
-	}
-
-	bool Model::Create(const std::string& filename, void* data) {
-		/*(Renderer*)(data);
-			Renderer* renderer = static_cast<Renderer*>(data);
-			return Create(*renderer, filename);*/
-		va_list args;
-		va_start(args, filename);
-		Renderer& renderer = va_arg(args, Renderer);
-		va_end(args);
-		return Create(renderer, filename);
 	}
 }
