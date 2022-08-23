@@ -14,11 +14,13 @@ namespace JREngine {
 	}
 
 	bool Font::Create(const std::string& filename, ...) {
-		va_list args;
+		//one of the broken va_start
+		/*va_list args;
 		va_start(args, filename);
 		int fontSize = va_arg(args, int);
 		va_end(args);
-		return Load(filename, fontSize);
+		return Load(filename, fontSize);*/
+		return false;
 	}
 
 	bool Font::Load(const std::string& filename, int fontSize){

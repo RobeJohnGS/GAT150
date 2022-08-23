@@ -18,11 +18,13 @@ namespace JREngine
 	}
 
 	bool Model::Create(const std::string& filename, ...) {
-		va_list args;
+		//other broken va_start
+		/*va_list args;
 		va_start(args, filename);
 		Renderer& renderer = va_arg(args, Renderer);
 		va_end(args);
-		return Create(filename, renderer);
+		return Create(filename, renderer);*/
+		return false;
 	}
 
 	void Model::Draw(Renderer& renderer, const Vector2& position, float angle, const Vector2& scale){
@@ -31,7 +33,7 @@ namespace JREngine
 		{
 			Vector2 p1 = Vector2::Rotate((points_[i] * scale), angle) + position;
 			Vector2 p2 = Vector2::Rotate((points_[i + 1] * scale), angle) + position;
-			renderer.DrawLine(p1, p2, color_);
+			renderer.DrawLine(p1, p2, m_color);
 		}
 	}
 
@@ -48,7 +50,7 @@ namespace JREngine
 			Vector2 p2 = Vector2::Rotate((points_[i + 1] * transform.scale), Math::DegToRad(transform.rotation)) + transform.position;*/
 			Vector2 p1 = mx * points_[i];
 			Vector2 p2 = mx * points_[i + 1];
-			renderer.DrawLine(p1, p2, color_);
+			renderer.DrawLine(p1, p2, m_color);
 		}
 	}
 
@@ -61,7 +63,7 @@ namespace JREngine
 		}
 
 		std::istringstream stream(buffer);
-		stream >> color_;
+		//stream >> m_color;
 
 		std::string line;
 		std::getline(stream, line);

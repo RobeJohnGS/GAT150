@@ -3,7 +3,7 @@
 #include <string>
 #include <istream>
 
-#define READ_DATA(value, data) JREngine::json::Get(value, #data, data)
+#define READ_DATA(value,data) JREngine::json::Get(value, #data, data)
 
 namespace JREngine {
 	struct Rect;
