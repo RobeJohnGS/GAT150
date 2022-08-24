@@ -19,7 +19,7 @@ namespace JREngine::json {
 		rapidjson::IStreamWrapper istream(stream);
 		document.ParseStream(istream);
 		if (document.IsObject() == false) {
-			LOG("JON file cannot be read %s", filename.c_str());
+			LOG("JSON file cannot be read %s", filename.c_str());
 			return false;
 		}
 
@@ -29,7 +29,7 @@ namespace JREngine::json {
 	bool Get(const rapidjson::Value& value, const std::string& name, int& data)
 	{
 		if (value.HasMember(name.c_str()) == false || value[name.c_str()].IsInt() == false) {
-			LOG("JON file cannot be read %s", name.c_str());
+			LOG("JSON file cannot be read %s", name.c_str());
 			return false;
 		}
 
@@ -40,7 +40,7 @@ namespace JREngine::json {
 	bool Get(const rapidjson::Value& value, const std::string& name, float& data)
 	{
 		if (value.HasMember(name.c_str()) == false || value[name.c_str()].IsNumber() == false) {
-			LOG("JON file cannot be read %s", name.c_str());
+			LOG("JSON file cannot be read %s", name.c_str());
 			return false;
 		}
 
@@ -51,7 +51,7 @@ namespace JREngine::json {
 	bool Get(const rapidjson::Value& value, const std::string& name, bool& data)
 	{
 		if (value.HasMember(name.c_str()) == false || value[name.c_str()].IsBool() == false) {
-			LOG("JON file cannot be read %s", name.c_str());
+			LOG("JSON file cannot be read %s", name.c_str());
 			return false;
 		}
 
@@ -62,7 +62,7 @@ namespace JREngine::json {
 	bool Get(const rapidjson::Value& value, const std::string& name, std::string& data)
 	{
 		if (value.HasMember(name.c_str()) == false || value[name.c_str()].IsString() == false) {
-			LOG("JON file cannot be read %s", name.c_str());
+			LOG("JSON file cannot be read %s", name.c_str());
 			return false;
 		}
 
@@ -73,7 +73,7 @@ namespace JREngine::json {
 	bool Get(const rapidjson::Value& value, const std::string& name, Vector2& data)
 	{
 		if (value.HasMember(name.c_str()) == false || value[name.c_str()].IsArray() == false || value[name.c_str()].Size() != 2) {
-			LOG("JON file cannot be read %s", name.c_str());
+			LOG("JSON file cannot be read %s", name.c_str());
 			return false;
 		}
 
@@ -81,7 +81,7 @@ namespace JREngine::json {
 
 		for (rapidjson::SizeType i = 0; i < array.Size(); i++) {
 			if (!array[i].IsNumber()) {
-				LOG("JON file cannot be read %s", name.c_str());
+				LOG("JSON file cannot be read %s", name.c_str());
 				return false;
 			}
 
@@ -94,7 +94,7 @@ namespace JREngine::json {
 	bool Get(const rapidjson::Value& value, const std::string& name, Color& data)
 	{
 		if (value.HasMember(name.c_str()) == false || value[name.c_str()].IsArray() == false || value[name.c_str()].Size() != 4) {
-			LOG("JON file cannot be read %s", name.c_str());
+			LOG("JSON file cannot be read %s", name.c_str());
 			return false;
 		}
 
@@ -102,7 +102,7 @@ namespace JREngine::json {
 
 		for (rapidjson::SizeType i = 0; i < array.Size(); i++) {
 			if (!array[i].IsInt()) {
-				LOG("JON file cannot be read %s", name.c_str());
+				LOG("JSON file cannot be read %s", name.c_str());
 				return false;
 			}
 
@@ -115,7 +115,7 @@ namespace JREngine::json {
 	bool Get(const rapidjson::Value& value, const std::string& name, Rect& data)
 	{
 		if (value.HasMember(name.c_str()) == false || value[name.c_str()].IsArray() == false || value[name.c_str()].Size() != 4) {
-			LOG("JON file cannot be read %s", name.c_str());
+			LOG("JSON file cannot be read %s", name.c_str());
 			return false;
 		}
 

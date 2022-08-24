@@ -12,7 +12,7 @@ namespace JREngine
 	public:
 
 		Model() = default;
-		Model(const std::vector<Vector2>& points, const Color& color) : points_{ points }, m_color{ color }{}
+		Model(const std::vector<Vector2>& points, const Color& color) : m_points{ points }, m_color{ color }{}
 		Model(const std::string& filename);
 
 		bool Create(const std::string& filename, ...) override;
@@ -29,8 +29,8 @@ namespace JREngine
 		float CalculateRadius();
 	private:
 
-		Color m_color;
-		std::vector<Vector2> points_;
+		Color m_color{ 0, 0, 0, 0 };
+		std::vector<Vector2> m_points;
 		float m_radius = 0;
 	};
 }

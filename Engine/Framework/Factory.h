@@ -1,17 +1,19 @@
 #pragma once
 #include "Singleton.h"
 #include <memory>
-#include <map>
 #include <string>
+#include <map>
 
 namespace JREngine {
 	class GameObject;
 
+	//Creator Base class
 	class CreatorBase {
 	public:
 		virtual std::unique_ptr<GameObject> Create() = 0;
 	};
 
+	//Creator class
 	template <typename T>
 	class Creator : public CreatorBase {
 		std::unique_ptr<GameObject> Create() override{
@@ -19,6 +21,7 @@ namespace JREngine {
 		}
 	};
 
+	//Factory class
 	class Factory : public Singleton<Factory>{
 	public:
 		template <typename T>

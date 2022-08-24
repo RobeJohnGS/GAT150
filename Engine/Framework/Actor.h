@@ -1,6 +1,7 @@
 #pragma once
 #include "GameObject.h"
 #include "Component.h"
+#include "Serialization/JSON.h"
 #include <vector>
 
 namespace JREngine
@@ -15,12 +16,13 @@ namespace JREngine
 		//Actor(const Model& model, const Transform& transform) : GameObject{ transform }, m_model{ model }  {}
 		Actor(const Transform& transform) : m_transform{ transform } {}
 
+		virtual void Initialize() override;
+
 		virtual void Update() override;
 		virtual void Draw(Renderer& renderer);
 
 		// Inherited via ISerializable
 		virtual bool Write(const rapidjson::Value& value) const override;
-
 		virtual bool Read(const rapidjson::Value& value) override;
 
 		//Add child broken
@@ -51,7 +53,6 @@ namespace JREngine
 		}
 
 		friend class Scene;
-		friend class Component;
 
 		bool m_destroy = false;
 

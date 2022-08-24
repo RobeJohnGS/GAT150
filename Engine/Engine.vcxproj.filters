@@ -40,6 +40,9 @@
     <Filter Include="Source Files\Serialization">
       <UniqueIdentifier>{fd60027e-05d6-431d-820a-8b1355c42bb3}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Physics">
+      <UniqueIdentifier>{fa9faf31-7941-4ec9-907a-34b00b389d81}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Math\MathUtils.cpp">

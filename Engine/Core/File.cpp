@@ -27,7 +27,7 @@ namespace JREngine {
 
 	bool ReadFile(const std::string& pathname, std::string& buffer){
 		if (!FileExists(pathname)) {
-			//LOG("Error could not read file. %s", pathname.c_str());
+			LOG("Error could not read file. %s", pathname.c_str());
 			return false;
 		}
 

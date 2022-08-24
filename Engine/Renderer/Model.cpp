@@ -4,9 +4,9 @@
 #include "Math/Transform.h"
 #include "Math/MathUtils.h"
 
+#include <cstdarg>
 #include <iostream>
 #include <sstream>
-#include <cstdarg>
 
 namespace JREngine
 {
@@ -18,7 +18,7 @@ namespace JREngine
 	}
 
 	bool Model::Create(const std::string& filename, ...) {
-		//other broken va_start
+		//va_start broken
 		/*va_list args;
 		va_start(args, filename);
 		Renderer& renderer = va_arg(args, Renderer);
@@ -29,27 +29,27 @@ namespace JREngine
 
 	void Model::Draw(Renderer& renderer, const Vector2& position, float angle, const Vector2& scale){
 
-		for (int i = 0; i < points_.size() - 1; i++)
+		for (int i = 0; i < m_points.size() - 1; i++)
 		{
-			Vector2 p1 = Vector2::Rotate((points_[i] * scale), angle) + position;
-			Vector2 p2 = Vector2::Rotate((points_[i + 1] * scale), angle) + position;
+			Vector2 p1 = Vector2::Rotate((m_points[i] * scale), angle) + position;
+			Vector2 p2 = Vector2::Rotate((m_points[i + 1] * scale), angle) + position;
 			renderer.DrawLine(p1, p2, m_color);
 		}
 	}
 
 	void Model::Draw(Renderer& renderer, const Transform& transform){
-		if (points_.size() == 0) {
+		if (m_points.size() == 0) {
 			return;
 		}
 
 		Matrix3x3 mx = transform.matrix;
 
-		for (int i = 0; i < points_.size() - 1; i++)
+		for (int i = 0; i < m_points.size() - 1; i++)
 		{
 			/*Vector2 p1 = Vector2::Rotate((points_[i] * transform.scale), Math::DegToRad(transform.rotation)) + transform.position;
 			Vector2 p2 = Vector2::Rotate((points_[i + 1] * transform.scale), Math::DegToRad(transform.rotation)) + transform.position;*/
-			Vector2 p1 = mx * points_[i];
-			Vector2 p2 = mx * points_[i + 1];
+			Vector2 p1 = mx * m_points[i];
+			Vector2 p2 = mx * m_points[i + 1];
 			renderer.DrawLine(p1, p2, m_color);
 		}
 	}
@@ -63,7 +63,7 @@ namespace JREngine
 		}
 
 		std::istringstream stream(buffer);
-		//stream >> m_color;
+		stream >> m_color;
 
 		std::string line;
 		std::getline(stream, line);
@@ -74,7 +74,7 @@ namespace JREngine
 			Vector2 point;
 
 			stream >> point;
-			points_.push_back(point);
+			m_points.push_back(point);
 		}
 
 		return true;
@@ -84,7 +84,7 @@ namespace JREngine
 	{
 		float radius = 0;
 
-		for (auto& point : points_) {
+		for (auto& point : m_points) {
 			if (point.Length() > radius) {
 				radius = point.Length();
 			}

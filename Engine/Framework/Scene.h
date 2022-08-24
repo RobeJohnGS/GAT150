@@ -14,12 +14,15 @@ namespace JREngine {
 		Scene() = default;
 		~Scene() = default;
 
+		void Initialize();
+
 		void Update();
 		void Draw(Renderer& renderer);
+		void Add(std::unique_ptr<Actor> actor);
+
 		virtual bool Write(const rapidjson::Value& value) const override;
 		virtual bool Read(const rapidjson::Value& value) override;
 
-		void Add(std::unique_ptr<Actor> actor);
 
 		template<typename T>
 		T* GetActor();

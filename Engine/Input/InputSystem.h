@@ -28,6 +28,8 @@ namespace JREngine {
 
 		void Update();
 
+		bool GetKeyDown(int key) { return m_keyboardState[key]; }
+
 		KeyState GetKeyState(uint32_t key);
 		bool GetKeyDown(uint32_t key) { return m_keyboardState[key]; }
 		bool GetPrevKeyDown(uint32_t key) { return m_prevKeyboardState[key]; }
@@ -37,17 +39,6 @@ namespace JREngine {
 		KeyState GetButtonState(uint32_t button);
 		bool GetButtonDown(uint32_t button) { return m_mouseButtonState[button]; }
 		bool GetPrevButtonDown(uint32_t button) { return m_prevMouseButtonState[button]; }
-
-		bool onKeyLeft(JREngine::InputSystem::KeyState state);
-		bool onKeyRight(JREngine::InputSystem::KeyState state);
-		bool onKeyUp(JREngine::InputSystem::KeyState state);
-		bool onKeyDown(JREngine::InputSystem::KeyState state);
-
-		bool onKeyEsc(JREngine::InputSystem::KeyState state);
-		bool onKeySpace(JREngine::InputSystem::KeyState state);
-
-		bool onRightClick(JREngine::InputSystem::KeyState state);
-		bool onLeftClick(JREngine::InputSystem::KeyState state);
 	private:
 		int m_numKeys;
 

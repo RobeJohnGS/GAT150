@@ -6,9 +6,6 @@ int main() {
 	JREngine::InitializeMemory();
 	JREngine::SetFilePath("../Assets");
 
-	rapidjson::Document document;
-	bool success = JREngine::json::Load("levels.txt", document);
-
 
 	JREngine::renderer_g.Initialize();
 	JREngine::inputSystem_g.Initialize();
@@ -21,6 +18,10 @@ int main() {
 	JREngine::renderer_g.SetClearColor(JREngine::Color{ 0, 0, 0, 255 });
 
 	JREngine::Scene scene;
+
+	rapidjson::Document document;
+	bool success = JREngine::json::Load("json.txt", document);
+	scene.Read(document);
 
 	std::unique_ptr<JREngine::Actor> actor = std::make_unique<JREngine::Actor>();
 	std::unique_ptr<JREngine::PlayerComponent> playerComponent = std::make_unique <JREngine::PlayerComponent>();
