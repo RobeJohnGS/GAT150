@@ -11,6 +11,7 @@ int main() {
 	JREngine::inputSystem_g.Initialize();
 	JREngine::audioSystem_g.Initialize();
 	JREngine::resourceManager_g.Initialize();
+	JREngine::physicsSystem_g.Initialize();
 
 	JREngine::Engine::Instance().Register();
 
@@ -20,7 +21,7 @@ int main() {
 	JREngine::Scene scene;
 
 	rapidjson::Document document;
-	bool success = JREngine::json::Load("json.txt", document);
+	bool success = JREngine::json::Load("level.txt", document);
 	scene.Read(document);
 
 	std::unique_ptr<JREngine::Actor> actor = std::make_unique<JREngine::Actor>();
@@ -36,6 +37,7 @@ int main() {
 	while (!quit) {
 		JREngine::inputSystem_g.Update();
 		JREngine::audioSystem_g.Update();
+		JREngine::physicsSystem_g.Update();
 		JREngine::time_g.Tick();
 
 		scene.Update();

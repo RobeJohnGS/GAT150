@@ -26,6 +26,7 @@
 #include "Framework/Scene.h"
 #include "Framework/Game.h"
 
+#include "Physics/PhysicsSystem.h"
 
 #include "Components/PlayerComponent.h"
 #include "Components/SpriteComponent.h"
@@ -50,6 +51,8 @@ namespace JREngine
 	extern AudioSystem audioSystem_g;
 
 	extern ResourceManager resourceManager_g;
+
+	extern PhysicsSystem physicsSystem_g;
 
 	class Engine : public Singleton<Engine>{
 	public:

@@ -2,8 +2,6 @@
 #include "Math/Vector2.h"
 #include "Resource/Resource.h"
 #include <string>
-//Not supposed to be here
-//#include "Renderer/Renderer.h"
 
 //Forward Declaration
 struct SDL_Texture;
@@ -20,8 +18,8 @@ namespace JREngine {
 
 		Vector2 GetSize() const;
 
-		friend class Renderer;
-	private:
+		//friend class Renderer;
 		SDL_Texture* m_texture = nullptr;
+	private:
 	};
 }

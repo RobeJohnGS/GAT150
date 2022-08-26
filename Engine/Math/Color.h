@@ -12,16 +12,13 @@ namespace JREngine {
 		uint8_t b;
 		uint8_t a;
 
+		friend std::istream& operator >> (std::istream& stream, Color& color);
 		uint8_t operator [](size_t index) const { return (&r)[index]; }
 		uint8_t& operator [] (size_t index) { return(&r)[index]; }
 
-		static const Color white;
-		static const Color black;
-		static const Color red;
-		static const Color green;
-		static const Color blue;
+		friend class Text;
 	};
 
+	std::ostream& operator << (std::ostream& stream, Color& color);
 	std::istream& operator >> (std::istream& stream, Color& color);
-	std::ostream& operator << (std::ostream& stream, Color& c);
 }

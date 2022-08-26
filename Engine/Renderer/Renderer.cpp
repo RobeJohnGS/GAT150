@@ -1,8 +1,8 @@
 #include "Renderer.h"
-#include "Engine.h"
-#include "Texture.h"
+//#include "Engine.h"
+//#include "Texture.h"
 #include "Math/Transform.h"
-#include "Math/MathUtils.h"
+//#include "Math/MathUtils.h"
 #include "Math/Rect.h"
 
 #include <SDL.h>

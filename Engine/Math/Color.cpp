@@ -2,9 +2,7 @@
 #include <string>
 
 namespace JREngine {
-	const Color Color::white{ 255, 255, 255, 255 };
-
-	inline std::istream& operator >> (std::istream& stream, Color& color)
+	std::istream& operator >> (std::istream& stream, Color& color)
 	{
 		std::string line;
 		std::getline(stream, line);
@@ -33,9 +31,9 @@ namespace JREngine {
 		return stream;
 	}
 
-	std::ostream& operator<<(std::ostream& stream, Color& c)
+	std::ostream& operator<<(std::ostream& stream, Color& color)
 	{
-		stream << (int)c.r << " " << (int)c.g << " " << (int)c.b << " " << (int)c.a;
+		stream << (int)color.r << " " << (int)color.g << " " << (int)color.b << " " << (int)color.a;
 
 		return stream;
 	}
