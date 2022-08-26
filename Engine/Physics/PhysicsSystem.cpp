@@ -7,6 +7,7 @@ namespace JREngine {
 	void PhysicsSystem::Initialize(){
 		b2Vec2 gravity{ 0, 10 };
 		m_world = std::make_unique<b2World>(gravity);
+		//contact listener
 	}
 
 	void PhysicsSystem::Shutdown(){
@@ -14,7 +15,7 @@ namespace JREngine {
 	}
 
 	void PhysicsSystem::Update(){
-
+		m_world->Step(1.0f / 60.0f, 8, 3);
 	}
 
 	b2Body* PhysicsSystem::CreateBody(const Vector2& pos, float angle, const RigidBodyData& data)
@@ -24,14 +25,30 @@ namespace JREngine {
 		b2BodyDef bodyDef;
 		bodyDef.type = (data.is_dynamic) ? b2_dynamicBody : b2_staticBody;
 		bodyDef.position = *((b2Vec2*)(&worldPos));
+		bodyDef.angle = Math::DegToRad(angle);
+		bodyDef.fixedRotation = data.constrain_angle;
+		b2Body* body = m_world->CreateBody(&bodyDef);
 
+		return body;
+	}
+
+	void PhysicsSystem::DestroyBody(b2Body* body) {
+		m_world->DestroyBody(body);
 	}
 
 	void PhysicsSystem::SetCollisionBox(b2Body* body, const CollisionData& data, Actor* actor){
+		b2PolygonShape shape;
+		Vector2 worldSize = PhysicsSystem::screenToWorld(data.size * 0.5f);
+		shape.SetAsBox(worldSize.x, worldSize.y);
 
-	}
+		b2FixtureDef fixtureDef;
+		fixtureDef.density = data.density;
+		fixtureDef.friction = data.friction;
+		fixtureDef.restitution = data.restitution;
+		fixtureDef.isSensor = data.is_trigger;
+		fixtureDef.shape = &shape;
+		fixtureDef.userData.pointer = reinterpret_cast<uintptr_t>(actor);
 
-	void PhysicsSystem::DestroyBody(b2Body* body){
-
+		body->CreateFixture(&fixtureDef);
 	}
 }

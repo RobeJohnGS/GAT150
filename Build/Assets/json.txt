@@ -14,9 +14,4 @@
       255, 
       255 
    ] 
-},
-{ 
-    "type":"AudioComponent", 
-    "sound_name":"audio/laser.wav", 
-    "play_on_start":true 
 }
