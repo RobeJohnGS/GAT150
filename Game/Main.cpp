@@ -21,7 +21,7 @@ int main() {
 	JREngine::Scene scene;
 
 	rapidjson::Document document;
-	bool success = JREngine::json::Load("level.txt", document);
+	bool success = JREngine::json::Load("json.txt", document);
 	scene.Read(document);
 
 	std::unique_ptr<JREngine::Actor> actor = std::make_unique<JREngine::Actor>();

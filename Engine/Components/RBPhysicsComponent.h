@@ -6,7 +6,7 @@ namespace JREngine {
 	class RBPhysicsComponent : public PhysicsComponent {
 	public:
 		RBPhysicsComponent() = default;
-		~RBPhysicsComponent() = default;
+		~RBPhysicsComponent();
 
 		CLASS_DECLARATION(RBPhysicsComponent)
 

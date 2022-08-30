@@ -7,13 +7,13 @@ namespace JREngine {
 
 	class SpriteComponent : public RendererComponent {
 	public:
+		CLASS_DECLARATION(SpriteComponent)
 		virtual void Update() override;
 		virtual void Draw(Renderer& renderer) override;
 
 		bool Write(const rapidjson::Value& value) const;
 		bool Read(const rapidjson::Value& value);
 
-		Rect source;
-		std::shared_ptr<Texture> texture_;
+		std::shared_ptr<Texture> m_texture;
 	};
 }

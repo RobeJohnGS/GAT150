@@ -2,13 +2,13 @@
 
 namespace JREngine
 {
-	InputSystem inputSystem_g;
 	Renderer renderer_g;
-
-	Time time_g;
-
+	InputSystem inputSystem_g;
+	
 	AudioSystem audioSystem_g;
-
+	
+	Time time_g;
+	
 	ResourceManager resourceManager_g;
 
 	PhysicsSystem physicsSystem_g;
@@ -18,7 +18,12 @@ namespace JREngine
 		REGISTER_CLASS(AudioComponent);
 		REGISTER_CLASS(ModelComponent);
 		REGISTER_CLASS(PhysicsComponent);
+		REGISTER_CLASS(RBPhysicsComponent);
+		REGISTER_CLASS(CollisionComponent);
 		REGISTER_CLASS(PlayerComponent);
 		REGISTER_CLASS(SpriteComponent);
+		REGISTER_CLASS(SpriteAnimComponent);
+		REGISTER_CLASS(TextComponent);
+		REGISTER_CLASS(TilemapComponent);
 	}
 }

@@ -9,7 +9,7 @@ namespace JREngine {
 	}
 
 	void SpriteComponent::Draw(Renderer& renderer){
-		renderer.Draw(texture_, m_owner->m_transform);
+		renderer.Draw(m_texture, m_owner->m_transform);
 	}
 
 	bool SpriteComponent::Write(const rapidjson::Value& value) const{
@@ -20,13 +20,13 @@ namespace JREngine {
 		std::string texture_name;
 		READ_DATA(value, texture_name);
 
-		texture_ = resourceManager_g.Get<Texture>(texture_name, renderer_g);
+		m_texture = resourceManager_g.Get<Texture>(texture_name, renderer_g);
 
 		if (!READ_DATA(value, source)) {
 			source.x = 0;
 			source.y = 0;
-			source.w = (int)texture_->GetSize().x;
-			source.h = (int)texture_->GetSize().y;
+			source.w = (int)m_texture->GetSize().x;
+			source.h = (int)m_texture->GetSize().y;
 		}
 
 		return true;

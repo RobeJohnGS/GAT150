@@ -13,7 +13,6 @@ namespace JREngine
 		Actor() = default;
 		Actor(const Actor& other);
 		Actor(const Transform& transform) : m_transform{ transform } {}
-		//Actor(const Model& model, const Transform& transform) : GameObject{ transform }, m_model{ model }  {}
 
 		CLASS_DECLARATION(Actor)
 
@@ -28,7 +27,9 @@ namespace JREngine
 
 		//Add child broken
 		void AddChild(std::unique_ptr<Actor> child);
+
 		void AddComponent(std::unique_ptr<Component> component);
+
 		template<typename T>
 		T* GetComponent();
 
@@ -56,12 +57,23 @@ namespace JREngine
 		void SetDestroy() {
 			m_destroy = true;
 		}
+		bool IsDestroyed() {
+			return m_destroy;
+		}
 
 		void SetActive(bool active = true) {
-			
+			m_active = active;
+		}
+		bool IsActive() {
+			return m_active;
+		}
+
+		Scene* GetScene() {
+			return m_scene;
 		}
 
 		friend class Scene;
+		friend class PlayerComponent;
 
 
 		Transform m_transform;
