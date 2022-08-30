@@ -34,6 +34,7 @@ namespace JREngine {
 		READ_DATA(value, m_volume);
 		READ_DATA(value, m_pitch);
 		READ_DATA(value, m_playOnAwake);
+		READ_DATA(value, m_loop);
 
 		audioSystem_g.AddAudio(m_soundName, m_soundName);
 

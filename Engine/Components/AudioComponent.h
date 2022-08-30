@@ -1,13 +1,16 @@
 #pragma once
 #include "Framework/Component.h"
 #include "Audio/AudioChannel.h"
-#include <string>
 
 namespace JREngine {
+	class Actor;
+
 	class AudioComponent : public Component {
 	public:
 		AudioComponent() = default;
 		~AudioComponent();
+
+		CLASS_DECLARATION(AudioComponent)
 
 		void Initialize() override;
 		void Update() override;

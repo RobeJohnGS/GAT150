@@ -7,9 +7,19 @@ namespace JREngine {
 		std::string line;
 		std::getline(stream, line);
 
-		std::string str;
-
-		// red 
+		//red
+		std::string strR = line.substr(line.find("{") + 1, line.find(",") - line.find(",") - 1);
+		color.r = (uint8_t)(std::stof(strR) * 255);
+		//green
+		std::string strG = line.substr(line.find(",") + 1, line.find(",") - line.find(",") - 1);
+		color.g = (uint8_t)(std::stof(strG) * 255);
+		//blue
+		std::string strB = line.substr(line.find(",") + 1, line.find(",") - line.find("{") - 1);
+		color.b = (uint8_t)(std::stof(strB) * 255);
+		//a
+		color.a = 255;
+		/*
+		 red 
 		str = line.substr(line.find("{") + 1, line.find(",") - (line.find("{") + 1));
 		color.r = (uint8_t)(std::stof(str) * 255);
 
@@ -27,6 +37,7 @@ namespace JREngine {
 
 		// default alpha to 255 
 		color.a = 255;
+		*/
 
 		return stream;
 	}

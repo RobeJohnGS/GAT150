@@ -24,8 +24,6 @@ namespace JREngine {
 
 		static const Matrix3x3 identity;
 		static const Matrix3x3 zero;
-		//bro, im so sleepy imma go "schmee-mee-mee-mee-mee-mee-mee" and i dont even care
-		//I did not write this
 	};
 
 	inline Matrix3x3::Matrix3x3(const Vector3& row1, const Vector3& row2, const Vector3& row3) {
@@ -49,12 +47,12 @@ namespace JREngine {
 		result[0][1] = rows[0][0] * mx[0][1] + rows[0][1] * mx[1][1] + rows[0][2] * mx[2][1];
 		result[0][2] = rows[0][0] * mx[0][2] + rows[0][1] * mx[1][2] + rows[0][2] * mx[2][2];
 
-		//row 2
+		// row 2
 		result[1][0] = rows[1][0] * mx[0][0] + rows[1][1] * mx[1][0] + rows[1][2] * mx[2][0];
 		result[1][1] = rows[1][0] * mx[0][1] + rows[1][1] * mx[1][1] + rows[1][2] * mx[2][1];
 		result[1][2] = rows[1][0] * mx[0][2] + rows[1][1] * mx[1][2] + rows[1][2] * mx[2][2];
 
-		//row 3
+		// row 3
 		result[2][0] = rows[2][0] * mx[0][0] + rows[2][1] * mx[1][0] + rows[2][2] * mx[2][0];
 		result[2][1] = rows[2][0] * mx[0][1] + rows[2][1] * mx[1][1] + rows[2][2] * mx[2][1];
 		result[2][2] = rows[2][0] * mx[0][2] + rows[2][1] * mx[1][2] + rows[2][2] * mx[2][2];
@@ -86,8 +84,11 @@ namespace JREngine {
 	inline Matrix3x3 Matrix3x3::CreateRotation(float rad) {
 		Matrix3x3 mx;
 
-		mx[0] = Vector3{ std::cos(rad), -std::sin(rad), 0.0f };
-		mx[1] = Vector3{ std::sin(rad), std::cos(rad), 0.0f };
+		float cos = std::cos(rad);
+		float sin = std::sin(rad);
+
+		mx[0] = Vector3{ cos, -sin, 0.0f };
+		mx[1] = Vector3{ sin, cos, 0.0f };
 		mx[2] = Vector3{ 0.0f, 0.0f, 1.0f };
 
 		return mx;

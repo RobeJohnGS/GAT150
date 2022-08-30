@@ -29,9 +29,9 @@ namespace JREngine {
 		if (soundFind == m_sounds.end()) {
 			FMOD::Sound* sound = nullptr;
 			m_fmodSystem->createSound(filename.c_str(), FMOD_DEFAULT, 0, &sound);
-			/*if (sound == nullptr) {
+			if (sound == nullptr) {
 				LOG("Error creating sound %s", filename.c_str());
-			}*/
+			}
 			m_sounds[name] = sound;
 		}
 	}
@@ -55,12 +55,5 @@ namespace JREngine {
 		channel->setPaused(false);
 
 		return AudioChannel{ channel };
-	}
-
-	void AudioSystem::StopMusic()
-	{
-		auto music = m_sounds.find("background");
-		FMOD::Sound* sound = music->second;
-		sound->release();
 	}
 }

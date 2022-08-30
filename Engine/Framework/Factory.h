@@ -1,5 +1,6 @@
 #pragma once
 #include "Singleton.h"
+#include "Core/Logger.h"
 #include <memory>
 #include <string>
 #include <map>
@@ -10,6 +11,8 @@ namespace JREngine {
 	//Creator Base class
 	class CreatorBase {
 	public:
+		virtual ~CreatorBase() = default;
+
 		virtual std::unique_ptr<GameObject> Create() = 0;
 	};
 
@@ -21,11 +24,32 @@ namespace JREngine {
 		}
 	};
 
+	template <typename T>
+	class PrefabCreator : public CreatorBase {
+	public:
+		~PrefabCreator() = default;
+
+		PrefabCreator(std::unique_ptr<T> instance) : m_instance{ std::move(instance) } {}
+
+		virtual std::unique_ptr<GameObject> Create() override {
+			return m_instance->Clone();
+		}
+	private:
+		std::unique_ptr<T> m_instance;
+	};
+
 	//Factory class
 	class Factory : public Singleton<Factory>{
 	public:
+		void Shutdown() {
+			m_registry.clear();
+		}
+
 		template <typename T>
 		void Register(const std::string& key);
+
+		template <typename T>
+		void RegisterPrefab(const std::string& key, std::unique_ptr<T> instance);
 
 		template <typename T>
 		std::unique_ptr<T> Create(const std::string& key);
@@ -37,6 +61,11 @@ namespace JREngine {
 	inline void Factory::Register(const std::string& key)
 	{
 		m_registry[key] = std::make_unique<Creator<T>>();
+	}
+
+	template<typename T>
+	inline void Factory::RegisterPrefab(const std::string& key, std::unique_ptr<T> instance){
+		m_registry[key] = std::make_unique<PrefabCreator<T>>(std::move(instance));
 	}
 
 	template<typename T>

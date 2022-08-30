@@ -5,29 +5,36 @@
 
 namespace JREngine {
 	//Forward Declaration
-	/*class Actor;
-	class Renderer;*/
+	class Actor;
+	class Renderer;
+	class Game;
 
-	class Scene : public ISerializable {
+	class Scene : public GameObject, public ISerializable {
 	//Implement all pure virtuals
 	public:
 		Scene() = default;
+		Scene(Game* game) : m_game{ game } {}
+		//Scene(const Scene& other) {}
 		~Scene() = default;
 
-		void Initialize();
+		CLASS_DECLARATION(Scene)
 
-		void Update();
+		void Initialize() override;
+
+		void Update() override;
 		void Draw(Renderer& renderer);
-		void Add(std::unique_ptr<Actor> actor);
 
 		virtual bool Write(const rapidjson::Value& value) const override;
 		virtual bool Read(const rapidjson::Value& value) override;
 
+		void Add(std::unique_ptr<Actor> actor);
+		void RemoveAll();
 
 		template<typename T>
 		T* GetActor();
 
 	private:
+		Game* m_game;
 		std::list<std::unique_ptr<Actor>> m_actors;
 		
 	};

@@ -1,8 +1,7 @@
 #include "ModelComponent.h"
-#include "Renderer/Renderer.h"
-#include "Engine.h"
-#include "Resource/ResourceManager.h"
+#include "Renderer/Model.h"
 #include "Framework/Actor.h"
+#include "Engine.h"
 
 namespace JREngine {
 	void JREngine::ModelComponent::Update()
@@ -10,14 +9,9 @@ namespace JREngine {
 		//
 	}
 
-	void JREngine::ModelComponent::Draw(Renderer& renderer)
-	{
-		m_model->Draw(renderer, m_owner->m_transform);
-	}
-
 	bool ModelComponent::Write(const rapidjson::Value& value) const
 	{
-		return false;
+		return true;
 	}
 
 	bool ModelComponent::Read(const rapidjson::Value& value)
@@ -27,5 +21,9 @@ namespace JREngine {
 
 		m_model = resourceManager_g.Get<Model>(model_name);
 		return true;
+	}
+
+	void JREngine::ModelComponent::Draw(Renderer& renderer){
+		m_model->Draw(renderer, m_owner->m_transform);
 	}
 }

@@ -18,13 +18,17 @@ namespace JREngine
 	}
 
 	bool Model::Create(const std::string& filename, ...) {
+		if (!Load(filename)) {
+			LOG("Error could not create model %s", filename.c_str());
+			return false;
+		}
 		//va_start broken
 		/*va_list args;
 		va_start(args, filename);
 		Renderer& renderer = va_arg(args, Renderer);
 		va_end(args);
 		return Create(filename, renderer);*/
-		return false;
+		return true;
 	}
 
 	void Model::Draw(Renderer& renderer, const Vector2& position, float angle, const Vector2& scale){
@@ -56,7 +60,7 @@ namespace JREngine
 
 	bool Model::Load(const std::string& filename){
 		std::string buffer;
-		JREngine::ReadFile(filename, buffer);
+		//JREngine::ReadFile(filename, buffer);
 		if (!JREngine::ReadFile(filename, buffer)) {
 			LOG("Error could not load model %s", filename.c_str());
 			return false;

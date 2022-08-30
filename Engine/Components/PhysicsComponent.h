@@ -3,10 +3,14 @@
 #include "Math/Vector2.h"
 
 namespace JREngine {
+	class Actor;
+
 	class PhysicsComponent : public Component {
 	public:
 		PhysicsComponent() = default;
 		~PhysicsComponent() = default;
+
+		CLASS_DECLARATION(PhysicsComponent)
 
 		void Update() override;
 		bool Write(const rapidjson::Value& value) const;

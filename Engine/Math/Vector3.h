@@ -1,7 +1,6 @@
 #pragma once
 #include <cmath>
-#include <sstream>
-#include <string>
+
 namespace JREngine
 {
 	struct Vector3
@@ -18,24 +17,6 @@ namespace JREngine
 		void Set(float x, float y, float z) { this->x = x, this->y = y, this->z = z; }
 		float operator [] (size_t index) const { return (&x)[index]; }
 		float& operator [] (size_t index) { return (&x)[index]; }
-
-		Vector3 Add(const Vector3& v) { return Vector3{ v.x + x, v.y + y, v.z + z }; }
-
-		float LengthSqr();
-		float Length();
-		float DstanceSqr(const Vector3& v);
-		float Distance(const Vector3& v);
-
-		Vector3 Normalized();
-		void Normalize();
-
-		static const Vector3 zero;
-		static const Vector3 one;
-
-		static const Vector3 up;
-		static const Vector3 down;
-		static const Vector3 left;
-		static const Vector3 right;
 
 		//Arithmetic Operators
 		//Vector3 = Vector3 + Vector3
@@ -69,14 +50,32 @@ namespace JREngine
 		//Vector3 == Vector3
 		bool operator == (const Vector3& v) const { return (this->x == v.x && this->y == v.y && this->z == v.z); }
 		bool operator != (const Vector3& v) const { return (this->x != v.x || this->y != v.y || this->z == v.z); }
+
+		Vector3 Add(const Vector3& v) { return Vector3{ v.x + x, v.y + y, v.z + z }; }
+
+		float LengthSqr();
+		float Length();
+		float DstanceSqr(const Vector3& v);
+		float Distance(const Vector3& v);
+
+		Vector3 Normalized();
+		void Normalize();
+
+		static const Vector3 zero;
+		static const Vector3 one;
+
+		static const Vector3 up;
+		static const Vector3 down;
+		static const Vector3 left;
+		static const Vector3 right;
 	};
 
 	inline float Vector3::LengthSqr() {
-		return (x * x) + (y * y);
+		return (x * x) + (y * y) + (z * z);
 	}
 
 	inline float Vector3::Length() {
-		return std::sqrt((x * x) + (y * y));
+		return std::sqrt(LengthSqr());
 	}
 
 	inline float Vector3::DstanceSqr(const Vector3& v)

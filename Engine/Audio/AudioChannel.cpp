@@ -1,5 +1,5 @@
 #include "AudioChannel.h"
-#include <fmod.hpp>
+#include "fmod.hpp"
 
 namespace JREngine {
 	bool AudioChannel::IsPlaying(){
@@ -9,6 +9,7 @@ namespace JREngine {
 		
 		bool isPlaying;
 		m_channel->isPlaying(&isPlaying);
+		return isPlaying;
 	}
 
 	void AudioChannel::Stop(){

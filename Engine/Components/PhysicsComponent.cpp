@@ -1,7 +1,5 @@
 #include "PhysicsComponent.h"
-#include "Framework/Actor.h"
 #include "Engine.h"
-#include "Math/Vector2.h"
 
 namespace JREngine {
 	void PhysicsComponent::Update(){

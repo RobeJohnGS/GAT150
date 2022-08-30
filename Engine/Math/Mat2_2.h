@@ -21,7 +21,6 @@ namespace JREngine {
 
 		static const Matrix2x2 identity;
 		static const Matrix2x2 zero;
-		//bro, im so sleepy imma go "schmee-schmee-schmee-schmee-schmee-schmee-schmee" and i dont even care
 	};
 
 	inline Matrix2x2::Matrix2x2(const Vector2& row1, const Vector2& row2) {
@@ -40,9 +39,9 @@ namespace JREngine {
 	inline Matrix2x2 Matrix2x2::operator*(const Matrix2x2& mx){
 		Matrix2x2 result;
 		result[0][0] = rows[0][0] * mx[0][0] + rows[0][1] * mx[1][0];
-		result[0][1] = rows[0][1] * mx[1][0] + rows[1][1] * mx[1][1];
-		result[1][0] = rows[0][0] * mx[0][0] + rows[0][1] * mx[1][0];
-		result[1][1] = rows[0][0] * mx[0][0] + rows[0][1] * mx[1][0];
+		result[0][1] = rows[0][0] * mx[0][1] + rows[0][1] * mx[1][1];
+		result[1][0] = rows[1][0] * mx[0][0] + rows[1][1] * mx[1][0];
+		result[1][1] = rows[1][0] * mx[0][1] + rows[1][1] * mx[1][1];
 
 		return result;
 	}
@@ -69,8 +68,12 @@ namespace JREngine {
 
 	inline Matrix2x2 Matrix2x2::CreateRotation(float rad){
 		Matrix2x2 mx;
-		mx[0] = Vector2{ std::cos(rad), -std::sin(rad) };
-		mx[1] = Vector2{ std::sin(rad), std::cos(rad) };
+
+		float cos = std::cos(rad);
+		float sin = std::sin(rad);
+
+		mx[0] = Vector2{ cos, -sin };
+		mx[1] = Vector2{ sin, cos };
 
 		return mx;
 	}

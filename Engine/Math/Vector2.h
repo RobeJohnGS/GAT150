@@ -1,5 +1,4 @@
 #pragma once
-//#include "../Math/Color.h"
 #include <cmath>
 #include <sstream>
 #include <string>
@@ -22,30 +21,30 @@ namespace JREngine
 		float operator [] (size_t index) const {return (&x) [ index ]; }
 		float& operator [] (size_t index) {return (&x) [ index ]; }
 
-		Vector2 Add(const Vector2& v) { return Vector2{ v.x + x, v.y + y }; }
-
-		float LengthSqr();
-		float Length();
-		float DstanceSqr(const Vector2& v);
-		float Distance(const Vector2& v);
-
-		Vector2 Normalized();
-		void Normalize();
-
-		float GetAngle();
-
-		static Vector2 Rotate(const Vector2& v, float angle);
-
-		static const Vector2 zero;
-		static const Vector2 one;
-
-		static const Vector2 up;
-		static const Vector2 down;
-		static const Vector2 left;
-		static const Vector2 right;
-
 		//Arithmetic Operators
-		//Vector2 = Vector2 + Vector2
+		Vector2 operator + (const Vector2& v) const { return Vector2{ x + v.x, y + v.y }; }
+		Vector2 operator - (const Vector2& v) const { return Vector2{ x - v.x, y - v.y }; }
+		Vector2 operator * (const Vector2& v) const { return Vector2{ x * v.x, y * v.y }; }
+		Vector2 operator / (const Vector2& v) const { return Vector2{ x / v.x, y / v.y }; }
+
+		// Vector2 = Vector2 + float
+		Vector2 operator - (float s) const { return Vector2{ x - s, y - s }; }
+		Vector2 operator + (float s) const { return Vector2{ x + s, y + s }; }
+		Vector2 operator * (float s) const { return Vector2{ x * s, y * s }; }
+		Vector2 operator / (float s) const { return Vector2{ x / s, y / s }; }
+
+		// assignment operators
+		Vector2& operator += (const Vector2& v) { x += v.x, y += v.y; return *this; }
+		Vector2& operator -= (const Vector2& v) { x -= v.x, y -= v.y; return *this; }
+		Vector2& operator *= (const Vector2& v) { x *= v.x, y *= v.y; return *this; }
+		Vector2& operator /= (const Vector2& v) { x /= v.x, y /= v.y; return *this; }
+
+		Vector2& operator += (float s) { x += s, y += s; return *this; }
+		Vector2& operator -= (float s) { x -= s, y -= s; return *this; }
+		Vector2& operator *= (float s) { x *= s, y *= s; return *this; }
+		Vector2& operator /= (float s) { x /= s, y /= s; return *this; }
+
+		/* Old one?
 		Vector2 operator + (const Vector2& v) const { return Vector2{ this->x + v.x, this->y + v.y }; }
 		Vector2 operator - (const Vector2& v) const { return Vector2{ this->x - v.x, this->y - v.y }; }
 		Vector2 operator / (const Vector2& v) const { return Vector2{ this->x / v.x, this->y / v.y }; }
@@ -67,6 +66,7 @@ namespace JREngine
 		Vector2 operator -= (float s) { return Vector2{ this->x -= s, this->y -= s }; }
 		Vector2 operator /= (float s) { return Vector2{ this->x /= s, this->y /= s }; }
 		Vector2 operator *= (float s) { return Vector2{ this->x *= s, this->y *= s }; }
+		*/
 
 		//Unary
 		//Vector2 = -Vector2
@@ -76,6 +76,25 @@ namespace JREngine
 		//Vector2 == Vector2
 		bool operator == (const Vector2& v) const { return (this->x == v.x && this->y == v.y); }
 		bool operator != (const Vector2& v) const { return (this->x != v.x || this->y != v.y); }
+
+		Vector2 Add(const Vector2& v) { return Vector2{ v.x + x, v.y + y }; }
+
+		float LengthSqr();
+		float Length();
+		float DstanceSqr(const Vector2& v);
+		float Distance(const Vector2& v);
+
+		Vector2 Normalized();
+		void Normalize();
+
+		float GetAngle();
+
+		static Vector2 Rotate(const Vector2& v, float angle);
+
+		static const Vector2 up;
+		static const Vector2 down;
+		static const Vector2 left;
+		static const Vector2 right;
 
 		static const Vector2 one;
 		static const Vector2 zero;
@@ -87,6 +106,7 @@ namespace JREngine
 
 	//Defined in Vector2.cpp
 	std::istream& operator >> (std::istream& stream, Vector2& v);
+	std::ostream& operator << (std::ostream& stream, const Vector2& v);
 
 	inline float Vector2::LengthSqr() { 
 		return (x * x) + (y * y); 
@@ -119,16 +139,16 @@ namespace JREngine
 		(*this) /= Length();
 	}
 
+	inline float Vector2::GetAngle()
+	{
+		return std::atan2(y, x);
+	}
+
 	inline Vector2 Vector2::Rotate(const Vector2& v, float angle)
 	{
 		float x = v.x * std::cos(angle) - v.y * std::sin(angle);
 		float y = v.x * std::sin(angle) + v.y * std::cos(angle);
 
 		return Vector2{ x, y };
-	}
-
-	inline float Vector2::GetAngle()
-	{
-		return std::atan2(y, x);
-	}
+	}	
 }

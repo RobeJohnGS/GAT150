@@ -34,7 +34,7 @@ namespace JREngine
 		{
 			// check if 'name' member exists and is of type 
 
-			if (value.HasMember(name.c_str()) == false || value[name.c_str()].IsInt() == false)
+			if (value.HasMember(name.c_str()) == false || value[name.c_str()].IsNumber() == false)
 			{
 				LOG("Error: Trouble reading json data %s", name.c_str());
 				return false;
@@ -49,9 +49,7 @@ namespace JREngine
 		{
 			// check if 'name' member exists and is of type 
 
-			if (value.HasMember(name.c_str()) == false || value[name.c_str()].IsNumber() ==
-				false)
-			{
+			if (value.HasMember(name.c_str()) == false || value[name.c_str()].IsNumber() == false){
 				LOG("error reading json data %s", name.c_str());
 				return false;
 			}
@@ -62,13 +60,10 @@ namespace JREngine
 			return true;
 		}
 
-		bool Get(const rapidjson::Value& value, const std::string& name, bool& data)
-		{
+		bool Get(const rapidjson::Value& value, const std::string& name, bool& data){
 			// check if 'name' member exists and is of type 
 
-			if (value.HasMember(name.c_str()) == false || value[name.c_str()].IsBool() ==
-				false)
-			{
+			if (value.HasMember(name.c_str()) == false || value[name.c_str()].IsBool() == false){
 				LOG("error reading json data %s", name.c_str());
 				return false;
 			}
@@ -78,6 +73,7 @@ namespace JREngine
 
 			return true;
 		}
+
 		bool Get(const rapidjson::Value& value, const std::string& name, std::string& data)
 		{
 			// check if 'name' member exists and is of type 
@@ -161,6 +157,43 @@ namespace JREngine
 			data.w = array[2].GetInt();
 			data.h = array[3].GetInt();
 
+			return true;
+		}
+
+		bool Get(const rapidjson::Value& value, const std::string& name, std::vector<std::string>& data)
+		{
+			if (!value.HasMember(name.c_str()) || !value[name.c_str()].IsArray()) {
+				LOG("error reading json data %s", name.c_str());
+				return false;
+			}
+
+			auto& array = value[name.c_str()];
+
+			for (rapidjson::SizeType i = 0; i < array.Size(); i++) {
+				if (!array[i].IsString()) {
+					LOG("error reading json data %s", name.c_str());
+					return false;
+				}
+				data.push_back(array[i].GetString());
+			}
+			return true;
+		}
+
+		bool Get(const rapidjson::Value& value, const std::string& name, std::vector<int>& data) {
+			if (!value.HasMember(name.c_str()) || !value[name.c_str()].IsArray()) {
+				LOG("error reading json data %s", name.c_str());
+				return false;
+			}
+
+			auto& array = value[name.c_str()];
+
+			for (rapidjson::SizeType i = 0; i < array.Size(); i++) {
+				if (!array[i].IsInt()) {
+					LOG("error reading json data %s", name.c_str());
+					return false;
+				}
+				data.push_back(array[i].GetInt());
+			}
 			return true;
 		}
 	}

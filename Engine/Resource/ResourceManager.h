@@ -32,6 +32,6 @@ namespace JREngine {
 
 			return resource;
 		}
-		return std::shared_ptr<T>();
+		//return std::shared_ptr<T>();
 	}
 }

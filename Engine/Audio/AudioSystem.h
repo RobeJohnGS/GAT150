@@ -22,7 +22,6 @@ namespace JREngine {
 
 		void AddAudio(const std::string& name, const std::string& filename);
 		AudioChannel PlayAudio(const std::string& name, float volume = 1, float pitch = 1, bool loop = false);
-		void StopMusic();
 	private:
 		FMOD::System* m_fmodSystem;
 		std::map<std::string, FMOD::Sound*>m_sounds;

@@ -1,6 +1,5 @@
 #include "Font.h"
 #include "Core/Logger.h"
-//#include "Renderer.h"
 #include <SDL_ttf.h>
 
 namespace JREngine {
@@ -14,12 +13,12 @@ namespace JREngine {
 		}
 	}
 
-	bool Font::Create(const std::string& filename, int& fontSize){
+	/*bool Font::Create(const std::string& filename, int& fontSize){
 		if (!Load(filename, fontSize)) {
 			return false;
 		}
 		return true;
-	}
+	}*/
 
 	bool Font::Create(const std::string& filename, ...)
 	{
@@ -28,8 +27,20 @@ namespace JREngine {
 		va_start(args, filename);
 		int& fontSize = va_arg(args, int);
 		va_end(args);
-		return Create(filename, fontSize);*/
-		return false;
+		Load(filename, fontSize);*/
+		return true;
+	}
+
+	SDL_Surface* Font::CreateSurface(const std::string& str, const Color& color)
+	{
+		SDL_Color c = *((SDL_Color*)(&color));
+		SDL_Surface* surface = TTF_RenderText_Solid(m_ttfFont, str.c_str(), c);
+
+		if (!surface) {
+			LOG(SDL_GetError());
+		}
+
+		return surface;
 	}
 
 	bool Font::Load(const std::string& filename, int fontSize){

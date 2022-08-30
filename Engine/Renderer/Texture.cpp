@@ -11,26 +11,7 @@ namespace JREngine {
 		}
 	}
 
-	bool Texture::Create(Renderer& renderer, const std::string& filename) {
-		SDL_Surface* surface = IMG_Load(filename.c_str());
-		if (surface == nullptr) {
-			LOG(SDL_GetError());
-			return false;
-		}
-
-		m_texture = SDL_CreateTextureFromSurface(renderer.GetRenderer(), surface);
-		if (m_texture == nullptr) {
-			LOG(SDL_GetError());
-			SDL_FreeSurface(surface);
-			return false;
-		}
-
-		//SDL_FreeSurface(surface);
-
-		return true;
-	}
-
-	bool Texture::Create(const std::string& filename, ...){
+	bool Texture::Create(const std::string& filename, ...) {
 		//other broken va_start
 		/*va_list args;
 		va_start(args, filename);
@@ -39,6 +20,43 @@ namespace JREngine {
 
 		return Create(renderer, filename);*/
 		return false;
+	}
+
+	bool Texture::CreateFromSurface(SDL_Surface* surface, Renderer& renderer)
+	{
+		if (m_texture) {
+			SDL_DestroyTexture(m_texture);
+		}
+
+		m_texture = SDL_CreateTextureFromSurface(renderer.m_renderer, surface);
+
+		SDL_FreeSurface(surface);
+
+		if (!m_texture) {
+			LOG(SDL_GetError());
+			return false;
+		}
+
+		return true;
+	}
+
+	bool Texture::Create(Renderer& renderer, const std::string& filename) {
+		SDL_Surface* surface = IMG_Load(filename.c_str());
+		if (surface == nullptr) {
+			LOG(SDL_GetError());
+			return false;
+		}
+
+		m_texture = SDL_CreateTextureFromSurface(renderer.m_renderer, surface);
+		if (m_texture == nullptr) {
+			LOG(SDL_GetError());
+			SDL_FreeSurface(surface);
+			return false;
+		}
+
+		SDL_FreeSurface(surface);
+
+		return true;
 	}
 
 	Vector2 Texture::GetSize() const{

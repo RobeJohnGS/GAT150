@@ -1,20 +1,21 @@
 #pragma once
 #include "GameObject.h"
 #include "Component.h"
-#include "Serialization/JSON.h"
 #include <vector>
 
 namespace JREngine
 {
 	class Scene;
-	class Component;
 	class Renderer;
 
 	class Actor : public GameObject, public ISerializable{
 	public:
 		Actor() = default;
-		//Actor(const Model& model, const Transform& transform) : GameObject{ transform }, m_model{ model }  {}
+		Actor(const Actor& other);
 		Actor(const Transform& transform) : m_transform{ transform } {}
+		//Actor(const Model& model, const Transform& transform) : GameObject{ transform }, m_model{ model }  {}
+
+		CLASS_DECLARATION(Actor)
 
 		virtual void Initialize() override;
 
@@ -52,17 +53,25 @@ namespace JREngine
 			this->name = name;
 		}
 
+		void SetDestroy() {
+			m_destroy = true;
+		}
+
+		void SetActive(bool active = true) {
+			
+		}
+
 		friend class Scene;
 
-		bool m_destroy = false;
 
 		Transform m_transform;
 	protected:
 		std::string name;
 		std::string tag;
 
-		Vector2 m_velocity;
-		float m_damping = 1;
+		bool m_active = true;
+
+		bool m_destroy = false;
 
 		Scene* m_scene = nullptr;
 

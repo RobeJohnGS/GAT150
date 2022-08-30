@@ -1,9 +1,10 @@
 #pragma once
+#include "Math/Vector2.h"
+#include "ContactListener.h"
 #include "box2d/b2_world.h"
 #include "box2d/b2_body.h"
 #include "box2d/b2_polygon_shape.h"
 #include "box2d/b2_fixture.h"
-#include "Math/Vector2.h"
 #include <memory>
 
 #define VECTOR2_TO_B2VEC2(vec) (*(b2Vec2*)(&vec))
@@ -13,7 +14,7 @@ namespace JREngine {
 	class PhysicsSystem {
 	public:
 		struct RigidBodyData {
-			float gravity_scale = 1;
+			float gravity_scale = 1.0f;
 			bool constrain_angle = false;
 			bool is_dynamic = true;
 		};
@@ -34,9 +35,10 @@ namespace JREngine {
 		
 		void Update();
 
-		void SetCollisionBox(b2Body* body, const CollisionData& data, class Actor* actor = nullptr);
 		b2Body* CreateBody(const Vector2& pos, float angle, const RigidBodyData& data);
 		void DestroyBody(b2Body* body);
+		void SetCollisionBox(b2Body* body, const CollisionData& data, class Actor* actor = nullptr);
+		
 
 		static Vector2 worldToScreen(const Vector2& world) {
 			return world * pixelsPerUnit;
@@ -49,5 +51,6 @@ namespace JREngine {
 		static const float pixelsPerUnit;
 
 		std::unique_ptr<b2World> m_world;
+		std::unique_ptr<ContactListener> m_contactListener;
 	};
 }
