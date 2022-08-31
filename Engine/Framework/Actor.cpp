@@ -1,6 +1,7 @@
 #include "Actor.h"
 #include "Factory.h"
 #include "Components/RendererComponent.h"
+#include "Engine.h"
 
 namespace JREngine{
 	Actor::Actor(const Actor& other) {
@@ -8,6 +9,7 @@ namespace JREngine{
 		tag = other.tag;
 		m_transform = other.m_transform;
 		m_scene = other.m_scene;
+		lifespan = other.lifespan;
 
 		for (auto& component : other.m_components) {
 			auto clone = std::unique_ptr<Component>((Component*)component->Clone().release());
@@ -27,6 +29,14 @@ namespace JREngine{
 	void Actor::Update() {
 		if (!m_active) {
 			return;
+		}
+
+		if (lifespan != 0) {
+			lifespan -= time_g.deltaTime;
+
+			if (lifespan <= 0) {
+				SetDestroy();
+			}
 		}
 
 		for (auto& component : m_components) {
@@ -72,6 +82,7 @@ namespace JREngine{
 		READ_DATA(value, tag);
 		READ_DATA(value, name);
 		READ_DATA(value, m_active);
+		READ_DATA(value, lifespan);
 
 		if (value.HasMember("transform")) {
 			m_transform.Read(value["transform"]);

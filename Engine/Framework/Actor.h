@@ -83,6 +83,7 @@ namespace JREngine
 
 		bool m_active = true;
 
+		float lifespan = 0;
 		bool m_destroy = false;
 
 		Scene* m_scene = nullptr;
