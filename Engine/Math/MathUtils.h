@@ -45,7 +45,7 @@ namespace Math {
 
 	template<typename T>
 	T Remap(T value, T inMin, T inMax, T outMin, T outMax) {
-		return Lerp(outMin, outMan, Normalize(value, inMin, inMax));
+		return Lerp(outMin, outMin, Normalize(value, inMin, inMax));
 	}
 
 	template<typename T>

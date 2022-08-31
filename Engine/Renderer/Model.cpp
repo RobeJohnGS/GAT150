@@ -17,17 +17,16 @@ namespace JREngine
 		m_radius = CalculateRadius();
 	}
 
-	bool Model::Create(const std::string& filename, ...) {
+	bool Model::Create(const std::string filename, ...) {
 		if (!Load(filename)) {
 			LOG("Error could not create model %s", filename.c_str());
 			return false;
 		}
-		//va_start broken
-		/*va_list args;
+		va_list args;
 		va_start(args, filename);
 		Renderer& renderer = va_arg(args, Renderer);
 		va_end(args);
-		return Create(filename, renderer);*/
+		//return Create(filename, renderer);
 		return true;
 	}
 

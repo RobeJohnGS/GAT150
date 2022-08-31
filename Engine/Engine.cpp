@@ -13,6 +13,8 @@ namespace JREngine
 
 	PhysicsSystem physicsSystem_g;
 
+	EventManager eventManager_g;
+
 	void Engine::Register(){
 		REGISTER_CLASS(Actor);
 		REGISTER_CLASS(AudioComponent);

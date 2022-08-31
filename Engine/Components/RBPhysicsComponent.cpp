@@ -15,9 +15,13 @@ namespace JREngine {
 	}
 
 	void JREngine::RBPhysicsComponent::Update(){
-		Vector2 pos = B2VEC2_TO_VECTOR2(m_body->GetPosition());
+		/*Vector2 pos = B2VEC2_TO_VECTOR2(m_body->GetPosition());
 		m_owner->m_transform.position = PhysicsSystem::worldToScreen(pos);
-		m_owner->m_transform.rotation = Math::RadToDeg(m_body->GetAngle());
+		m_owner->m_transform.rotation = Math::RadToDeg(m_body->GetAngle());*/
+	}
+
+	void RBPhysicsComponent::ApplyForce(const Vector2& force){
+		m_body->ApplyForceToCenter(VECTOR2_TO_B2VEC2(force), true);
 	}
 
 	bool JREngine::RBPhysicsComponent::Write(const rapidjson::Value& value) const

@@ -4,8 +4,11 @@
 
 namespace JREngine {
 	void PlayerComponent::Initialize(){
-		//titties
-		//auto comp = m_owner->GetComponent<CollisionComponent>();
+		auto comp = m_owner->GetComponent<CollisionComponent>();
+		if (comp) {
+			comp->SetCollisionEnter(std::bind(&PlayerComponent::OnCollisionEnter, this, std::placeholders::_1));
+			comp->SetCollisionExit(std::bind(&PlayerComponent::OnCollisionExit, this, std::placeholders::_1));
+		}
 	}
 
 	void PlayerComponent::Update() {
@@ -45,9 +48,15 @@ namespace JREngine {
 
 	void PlayerComponent::OnCollisionEnter(Actor* other){
 		if (other->GetName() == "Coin") {
-			//titties
-			//Event event;
+			Event event;
+			event.name = "EVENT_ADD_POINTS";
+			event.data = 100;
+			eventManager_g.Notify(event);
+
+			other->SetDestroy();
 		}
+
+		std::cout << "Player enter\n";
 	}
 
 	void PlayerComponent::OnCollisionExit(Actor* other){

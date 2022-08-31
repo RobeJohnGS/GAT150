@@ -17,11 +17,11 @@ namespace JREngine {
 		~Font();
 
 		//bool Create(const std::string& filename, int& fontSize);
-		bool Create(const std::string& filename, ...) override;
+		bool Create(const std::string filename, ...) override;
 
-		SDL_Surface* CreateSurface(const std::string& str, const Color& color);
+		SDL_Surface* CreateSurface(const std::string& text, const Color& color);
 
-		bool Load(const std::string& filename, int fontSize);
+		void Load(const std::string& filename, int fontSize);
 
 		friend class Text;
 	private:

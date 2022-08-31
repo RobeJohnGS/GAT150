@@ -1,34 +1,42 @@
 #include "EventManager.h"
 
 namespace JREngine {
-	void EventManager::Initialize(){
-
+	void EventManager::Initialize()
+	{
+		//
 	}
 
-	void EventManager::Shutdown(){
-
+	void EventManager::Shutdown()
+	{
+		//
 	}
 
-	void EventManager::Update(){
-
+	void EventManager::Update()
+	{
+		//
 	}
 
-	void EventManager::Subscribe(const std::string& name, Event::functionPtr function, GameObject* reciever){
+	void EventManager::Subscribe(const std::string& name, Event::functionPtr function, GameObject* receiver)
+	{
 		Observer observer;
-		observer.reciever = reciever;
+		observer.receiver = receiver;
 		observer.function = function;
 
 		m_events[name].push_back(observer);
 	}
 
-	void EventManager::Unsubscribe(const std::string& name, GameObject* reciever){
-
+	void EventManager::Unsubscribe(const std::string& name, GameObject* receiver)
+	{
+		//
 	}
 
-	void EventManager::Notify(const Event& event){
+	void EventManager::Notify(const Event& event)
+	{
 		auto& observers = m_events[event.name];
-		for (auto& observer : observers) {
-			if (event.reciever == nullptr || event.reciever == observer.reciever) {
+		for (auto& observer : observers)
+		{
+			if (event.receiver == nullptr || event.receiver == observer.receiver)
+			{
 				observer.function(event);
 			}
 		}

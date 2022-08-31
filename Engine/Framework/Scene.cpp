@@ -24,7 +24,7 @@ namespace JREngine {
 			}
 		}
 
-		/*for (auto iter1 = m_actors.begin(); iter1 != m_actors.end(); iter1++) {
+		for (auto iter1 = m_actors.begin(); iter1 != m_actors.end(); iter1++) {
 			for (auto iter2 = m_actors.begin(); iter2 != m_actors.end(); iter2++) {
 				if (iter1 == iter2) {
 					continue;
@@ -38,7 +38,7 @@ namespace JREngine {
 					(*iter2)->OnCollision((*iter1).get());
 				}
 			}
-		}*/
+		}
 	}
 
 	void Scene::Draw(Renderer& renderer){

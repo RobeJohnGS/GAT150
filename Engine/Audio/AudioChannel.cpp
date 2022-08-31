@@ -3,13 +3,15 @@
 
 namespace JREngine {
 	bool AudioChannel::IsPlaying(){
-		if (m_channel == nullptr) {
+		if (m_channel) {
+			bool is_playing;
+			m_channel->isPlaying(&is_playing);
+
+			return is_playing;
+		}
+		else {
 			return false;
 		}
-		
-		bool isPlaying;
-		m_channel->isPlaying(&isPlaying);
-		return isPlaying;
 	}
 
 	void AudioChannel::Stop(){

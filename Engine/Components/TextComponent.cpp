@@ -10,6 +10,10 @@ namespace JREngine {
 		renderer_g.Draw(m_texture, m_owner->m_transform, registration);
 	}
 
+	void TextComponent::SetText(const std::string& text){
+		m_texture->CreateFromSurface(m_font->CreateSurface(text, color), renderer_g);
+	}
+
 	bool TextComponent::Write(const rapidjson::Value& value) const{
 		return true;
 	}
@@ -25,8 +29,7 @@ namespace JREngine {
 
 		m_texture = std::make_unique<Texture>();
 
-		//titties
-		//SetText(text);
+		SetText(text);
 
 		return true;
 	}

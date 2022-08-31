@@ -14,7 +14,7 @@ namespace JREngine
 
 	public:
 		std::string name;
-		GameObject* reciever = nullptr;
+		GameObject* receiver = nullptr;
 		std::variant<int, bool, float, std::string> data;
 	};
 

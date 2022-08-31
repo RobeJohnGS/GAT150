@@ -16,7 +16,7 @@ namespace JREngine {
 		bool Write(const rapidjson::Value& value) const;
 		bool Read(const rapidjson::Value& value);
 
-		void ApplyForce(const Vector2& force) {
+		virtual void ApplyForce(const Vector2& force) {
 			acceleration += force;
 		}
 
@@ -24,6 +24,6 @@ namespace JREngine {
 		Vector2 velocity;
 		Vector2 acceleration;
 
-		float m_damping = 1;
+		float m_damping = 1.0f;
 	};
 }

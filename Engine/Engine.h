@@ -13,8 +13,7 @@
 #include "Framework/Game.h"
 #include "Framework/Factory.h"
 #include "Framework/Singleton.h"
-//titties
-//#include "Framework/EventManager.h"
+#include "Framework/EventManager.h"
 
 #include "Components/PlayerComponent.h"
 #include "Components/AudioComponent.h"
@@ -54,8 +53,7 @@ namespace JREngine
 	extern Time time_g;
 	extern ResourceManager resourceManager_g;
 	extern PhysicsSystem physicsSystem_g;
-	//titties
-	//extern EventManager eventManager_g;
+	extern EventManager eventManager_g;
 
 	
 

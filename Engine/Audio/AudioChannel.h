@@ -7,7 +7,7 @@ namespace FMOD {
 namespace JREngine {
 	class AudioChannel {
 	public:
-		AudioChannel(){}
+		AudioChannel() = default;
 		AudioChannel(FMOD::Channel* channel) {
 			m_channel = channel;
 		}
@@ -22,6 +22,6 @@ namespace JREngine {
 		float GetVolume();
 
 	private:
-		FMOD::Channel* m_channel = nullptr;
+		FMOD::Channel* m_channel{ nullptr };
 	};
 }

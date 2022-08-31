@@ -16,6 +16,8 @@ namespace JREngine {
 		virtual void Update() override;
 		virtual void Draw(Renderer& renderer) override;
 
+		void SetText(const std::string& text);
+
 		virtual bool Write(const rapidjson::Value& value) const override;
 		virtual bool Read(const rapidjson::Value& value) override;
 

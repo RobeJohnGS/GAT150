@@ -3,23 +3,24 @@
 #include <map>
 #include <list>
 
-namespace JREngine {
-	class EventManager {
+namespace JREngine
+{
+	class EventManager
+	{
 	public:
-		//struct
-		struct Observer {
-			GameObject* reciever = nullptr;
+		struct Observer
+		{
+			GameObject* receiver = nullptr;
 			Event::functionPtr function;
 		};
 
-		//normal class
+	public:
 		void Initialize();
 		void Shutdown();
-		
 		void Update();
 
-		void Subscribe(const std::string& name, Event::functionPtr function, GameObject* reciever = nullptr);
-		void Unsubscribe(const std::string& name, GameObject* reciever);
+		void Subscribe(const std::string& name, Event::functionPtr function, GameObject* receiver = nullptr);
+		void Unsubscribe(const std::string& name, GameObject* receiver);
 
 		void Notify(const Event& event);
 

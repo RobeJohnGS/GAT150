@@ -5,7 +5,7 @@ void JRGame::Initialize(){
 	m_scene = std::make_unique<JREngine::Scene>();
 
 	rapidjson::Document document;
-	std::vector<std::string> sceneNames = { "scenes/prefab.txt", "scenes/tilemap.txt", "scenes/level.txt" };
+	std::vector<std::string> sceneNames = { "Scenes/Prefab.txt", "Scenes/Tilemap.txt", "Scenes/Level.txt" };
 
 	for (auto sceneName : sceneNames) {
 		bool success = JREngine::json::Load(sceneName, document);
@@ -18,6 +18,8 @@ void JRGame::Initialize(){
 		m_scene->Read(document);
 	}
 	m_scene->Initialize();
+
+	JREngine::eventManager_g.Subscribe("EVENT_ADD_POINTS", std::bind(&JRGame::OnAddPoints, this, std::placeholders::_1));
 }
 
 void JRGame::Shutdown(){
@@ -27,6 +29,7 @@ void JRGame::Shutdown(){
 void JRGame::Update(){
 	switch (m_gameState) {
 	case gameState::title:
+	{
 		m_scene->GetActorFromName("Title")->SetActive(true);
 		m_lives = 3;
 
@@ -35,6 +38,7 @@ void JRGame::Update(){
 
 			m_gameState = gameState::start;
 		}
+	}
 		break;
 	case gameState::start:
 		for (int i = 0; i < 10; i++) {
@@ -66,8 +70,7 @@ void JRGame::Draw(JREngine::Renderer& renderer){
 }
 
 void JRGame::OnAddPoints(const JREngine::Event& event){
-	//titties
-	//AddPoints(std::get<int>(event.data));
+	AddPoints(std::get<int>(event.data));
 
 	std::cout << event.name << std::endl;
 	std::cout << GetScore() << std::endl;

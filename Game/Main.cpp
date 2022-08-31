@@ -1,6 +1,6 @@
+#include "JRGame.h"
 #include "Engine.h"
 #include <iostream>
-#include <cassert>
 
 int main() {
 	JREngine::InitializeMemory();
@@ -12,16 +12,20 @@ int main() {
 	JREngine::audioSystem_g.Initialize();
 	JREngine::resourceManager_g.Initialize();
 	JREngine::physicsSystem_g.Initialize();
+	JREngine::eventManager_g.Initialize();
 
 	JREngine::Engine::Instance().Register();
 
 	JREngine::renderer_g.CreateWindow("Game", 800, 600);
 	JREngine::renderer_g.SetClearColor(JREngine::Color{ 0, 0, 0, 255 });
 
-	JREngine::Scene scene;
+	std::unique_ptr<JRGame> game = std::make_unique<JRGame>();
+	game->Initialize();
+
+	/*JREngine::Scene scene;
 
 	rapidjson::Document document;
-	bool success = JREngine::json::Load("json.txt", document);
+	bool success = JREngine::json::Load("Scenes/Level.txt", document);
 	scene.Read(document);
 
 	std::unique_ptr<JREngine::Actor> actor = std::make_unique<JREngine::Actor>();
@@ -31,29 +35,39 @@ int main() {
 	scene.Add(std::move(actor));
 	scene.Read(document);
 
-	float angle = 0;
+	float angle = 0;*/
 
 	bool quit = false;
 	while (!quit) {
+		JREngine::time_g.Tick();
 		JREngine::inputSystem_g.Update();
 		JREngine::audioSystem_g.Update();
 		JREngine::physicsSystem_g.Update();
-		JREngine::time_g.Tick();
+		JREngine::eventManager_g.Update();
 
-		scene.Update();
+		//scene.Update();
+		game->Update();
 
 		JREngine::renderer_g.BeginFrame();
-		scene.Draw(JREngine::renderer_g);
-		scene.Update();
-		scene.Draw(JREngine::renderer_g);
+		//scene.Draw(JREngine::renderer_g);
+		//scene.Update();
+		//scene.Draw(JREngine::renderer_g);
+		game->Draw(JREngine::renderer_g);
 
 		JREngine::renderer_g.EndFrame();
 	}
 
-	JREngine::audioSystem_g.Shutdown();
-	JREngine::inputSystem_g.Shutdown();
-	JREngine::renderer_g.Shutdown();
+	game->Shutdown();
+	game.reset();
+
+	JREngine::Factory::Instance().Shutdown();
+
+	JREngine::physicsSystem_g.Shutdown();
 	JREngine::resourceManager_g.Shutdown();
+	JREngine::inputSystem_g.Shutdown();
+	JREngine::audioSystem_g.Shutdown();
+	JREngine::renderer_g.Shutdown();
+	JREngine::physicsSystem_g.Shutdown();
 }
 
 

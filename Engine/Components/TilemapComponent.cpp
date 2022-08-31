@@ -16,8 +16,7 @@ namespace JREngine {
 				int y = i / num_columns;
 
 				actor->m_transform.position = m_owner->m_transform.position + (Vector2{ x, y } * size);
-				//titties
-				//m_owner->GetScene()->AddActor(std::move(actor));
+				m_owner->GetScene()->Add(std::move(actor));
 			}
 		}
 	}

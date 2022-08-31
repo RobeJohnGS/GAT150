@@ -1,6 +1,7 @@
 #pragma once
 #include <cstdint>
 #include <iostream>
+#include <string>
 
 namespace JREngine {
 	//typedef unsigned char u8_t;

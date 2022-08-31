@@ -8,7 +8,7 @@
 #include <memory>
 
 #define VECTOR2_TO_B2VEC2(vec) (*(b2Vec2*)(&vec))
-#define B2VEC2_TO_VECTOR2(vec) (*(Vector2*)(&vec))
+#define B2VEC2_TO_VECTOR2(vec) (*(JREngine::Vector2*)(&vec))
 
 namespace JREngine {
 	class PhysicsSystem {

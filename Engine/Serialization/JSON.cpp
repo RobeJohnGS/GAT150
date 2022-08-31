@@ -13,7 +13,7 @@ namespace JREngine
 		bool Load(const std::string& filename, rapidjson::Document& document)
 		{
 			std::ifstream stream(filename);
-			if (stream.is_open() == false)
+			if (!stream.is_open())
 			{
 				LOG("Error: Could Not Open File %s.", filename.c_str());
 				return false;

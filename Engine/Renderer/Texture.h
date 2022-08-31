@@ -14,7 +14,7 @@ namespace JREngine {
 		Texture() = default;
 		~Texture();
 
-		bool Create(const std::string& filename, ...) override;
+		bool Create(const std::string filename, ...) override;
 		bool CreateFromSurface(SDL_Surface* surface, Renderer& renderer);
 		bool Create(Renderer& renderer, const std::string& filename);
 
