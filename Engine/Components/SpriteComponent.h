@@ -14,6 +14,7 @@ namespace JREngine {
 		bool Write(const rapidjson::Value& value) const;
 		bool Read(const rapidjson::Value& value);
 
+		//bit assignment
 		std::shared_ptr<Texture> m_texture;
 	};
 }

@@ -4,7 +4,16 @@
 
 namespace JREngine {
 	void CollisionComponent::Initialize(){
-		//titties
+		auto component = m_owner->GetComponent<RBPhysicsComponent>();
+		if (component) {
+			if (data.size.x == 0 && data.size.y == 0) {
+				auto renderComponent = m_owner->GetComponent<RendererComponent>();
+				if (renderComponent) {
+					data.size = Vector2{ renderComponent->GetSource().w, renderComponent->GetSource().h };
+				}
+			}
+			physicsSystem_g.SetCollisionBox(component->m_body, data, m_owner);
+		}
 	}
 
 	void CollisionComponent::Update(){

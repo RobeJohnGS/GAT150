@@ -34,6 +34,7 @@ namespace JREngine {
 		return true;
 	}
 
+	//bit assignment
 	Rect& SpriteAnimComponent::GetSource(){
 		Vector2 cellSize = m_texture->GetSize() / Vector2{ num_columns, num_rows };
 

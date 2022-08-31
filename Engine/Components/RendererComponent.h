@@ -18,6 +18,7 @@ namespace JREngine {
 		}
 
 	protected:
+		//bit assignment
 		Rect source;
 		//8/30/22
 		bool flipH = false;

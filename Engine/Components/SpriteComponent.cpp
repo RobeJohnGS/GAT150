@@ -9,7 +9,7 @@ namespace JREngine {
 	}
 
 	void SpriteComponent::Draw(Renderer& renderer){
-		renderer.Draw(m_texture, m_owner->m_transform);
+		renderer.Draw(m_texture, GetSource(), m_owner->m_transform);
 	}
 
 	bool SpriteComponent::Write(const rapidjson::Value& value) const{

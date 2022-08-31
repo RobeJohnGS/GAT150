@@ -33,6 +33,7 @@ namespace JREngine {
 		template<typename T>
 		T* GetActor();
 
+		//Bits get actor from tag/name
 		template<typename T = Actor>
 		T* GetActorFromName(const std::string& name);
 
