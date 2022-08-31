@@ -129,8 +129,8 @@
             {
                "type":"TextComponent",
                "text":"Hello World!",
-               "font_name":"fonts/Minecraftia-Regular.ttf",
-               "font_size":48,
+               "fontName":"fonts/Minecraftia-Regular.ttf",
+               "fontSize":48,
                "registration":[
                   0.5,
                   0.5
