@@ -77,6 +77,8 @@ namespace JREngine {
 			return std::unique_ptr<T>(dynamic_cast<T*>(iter->second->Create().release()));
 		}
 
+		LOG("error could not find key %s", key.c_str());
+
 		return std::unique_ptr<T>();
 	}
 }

@@ -14,7 +14,7 @@
 			"components":[
 				{
 					"type":"SpriteComponent",
-					"texture_name":"Tilemaps/tileset2_32x32.png",
+					"texture_name":"textures/tileset2_32x32.png",
 					"source":[
 						96,
 						416,
@@ -28,10 +28,7 @@
 				},
 				{
 					"type":"CollisionComponent",
-					"data.size":[
-						64,
-						64
-					]
+					"data.restitution":0
 				}
 			]
 		},
@@ -49,7 +46,7 @@
 			"components":[
 				{
 					"type":"SpriteComponent",
-					"texture_name":"Tilemaps/tileset2_32x32.png",
+					"texture_name":"textures/tileset2_32x32.png",
 					"source":[
 						0,
 						128,
@@ -63,10 +60,7 @@
 				},
 				{
 					"type":"CollisionComponent",
-					"data.size":[
-						64,
-						64
-					]
+					"data.restitution":0
 				}
 			]
 		},
@@ -89,7 +83,7 @@
 					"tiles": [
 							0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
 							0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-							0, 2, 2, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+							0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
 							0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
 							0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
 							0, 0, 0, 0, 0, 2, 2, 2, 0, 0, 0, 0, 0,

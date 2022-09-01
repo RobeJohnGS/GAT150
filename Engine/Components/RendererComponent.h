@@ -1,6 +1,7 @@
 #pragma once
 #include "Framework/Component.h"
 #include "Math/Rect.h"
+#include "Math/Vector2.h"
 
 namespace JREngine {
 	class Renderer;
@@ -15,6 +16,10 @@ namespace JREngine {
 
 		void SetFlipH(bool flip = true) {
 			flipHorizontal = flip;
+		}
+
+		bool GetFlipH() {
+			return flipHorizontal;
 		}
 
 	protected:

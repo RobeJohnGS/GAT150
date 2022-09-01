@@ -147,6 +147,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="GameComponents\EnemyComponent.cpp" />
     <ClCompile Include="JRGame.cpp" />
     <ClCompile Include="Main.cpp" />
   </ItemGroup>
@@ -156,6 +157,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="GameComponents\EnemyComponent.h" />
     <ClInclude Include="JRGame.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

@@ -8,7 +8,6 @@ namespace JREngine {
 	class PhysicsComponent : public Component {
 	public:
 		PhysicsComponent() = default;
-		~PhysicsComponent() = default;
 
 		CLASS_DECLARATION(PhysicsComponent)
 

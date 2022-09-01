@@ -14,7 +14,7 @@ namespace JREngine {
 		virtual bool Write(const rapidjson::Value& value) const override;
 		virtual bool Read(const rapidjson::Value& value) override;
 
-		//variablesS
+		//variables
 		float health = 100;
 		float damage = 10;
 		float speed = 0;

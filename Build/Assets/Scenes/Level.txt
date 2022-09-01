@@ -104,9 +104,10 @@
          "components":[
             {
                "type":"AudioComponent",
-               "sound_name":"audio/music.mp3",
+               "sound_name":"Audio/music.wav",
                "loop":true,
-               "play_on_start":true
+               "play_on_start":true,
+		"volume": 0.5
             }
          ]
       },

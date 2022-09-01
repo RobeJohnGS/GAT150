@@ -1,6 +1,7 @@
 #pragma once
 #include "RendererComponent.h"
 #include "Math/Rect.h"
+#include <map>
 
 namespace JREngine {
 	class Texture;
