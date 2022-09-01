@@ -34,7 +34,6 @@ namespace JREngine {
 		{
 			LOG(SDL_GetError());
 		}
-
 		return surface;
 	}
 

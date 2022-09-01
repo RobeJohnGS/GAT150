@@ -23,7 +23,7 @@ namespace JREngine {
 		std::string textureName;
 		READ_DATA(value, textureName);
 
-		m_texture = resourceManager_g.Get<Texture>(textureName, renderer_g);
+		texture = resourceManager_g.Get<Texture>(textureName, renderer_g);
 
 		READ_DATA(value, fps);
 		READ_DATA(value, num_columns);
@@ -36,7 +36,7 @@ namespace JREngine {
 
 	//bit assignment
 	Rect& SpriteAnimComponent::GetSource(){
-		Vector2 cellSize = m_texture->GetSize() / Vector2{ num_columns, num_rows };
+		Vector2 cellSize = texture->GetSize() / Vector2{ num_columns, num_rows };
 
 		int column = (frame - 1) % num_columns;
 		int row = (frame - 1) / num_columns;
@@ -50,6 +50,6 @@ namespace JREngine {
 	}
 
 	void SpriteAnimComponent::Draw(Renderer& renderer){
-		renderer.Draw(m_texture, GetSource(), m_owner->m_transform);
+		renderer.Draw(texture, GetSource(), m_owner->m_transform);
 	}
 }

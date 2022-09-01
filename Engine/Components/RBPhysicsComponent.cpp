@@ -11,13 +11,15 @@ namespace JREngine {
 	void JREngine::RBPhysicsComponent::Initialize(){
 		m_body = physicsSystem_g.CreateBody(m_owner->m_transform.position, m_owner->m_transform.rotation, data);
 		m_body->SetGravityScale(data.gravity_scale);
-		m_body->SetLinearDamping(m_damping);
+		m_body->SetLinearDamping(damping);
 	}
 
 	void JREngine::RBPhysicsComponent::Update(){
-		/*Vector2 pos = B2VEC2_TO_VECTOR2(m_body->GetPosition());
-		m_owner->m_transform.position = PhysicsSystem::worldToScreen(pos);
-		m_owner->m_transform.rotation = Math::RadToDeg(m_body->GetAngle());*/
+		Vector2 position = B2VEC2_TO_VECTOR2(m_body->GetPosition());
+		m_owner->m_transform.position = PhysicsSystem::worldToScreen(position);
+		m_owner->m_transform.rotation = Math::RadToDeg(m_body->GetAngle());
+
+		velocity = B2VEC2_TO_VECTOR2(m_body->GetLinearVelocity());
 	}
 
 	void RBPhysicsComponent::ApplyForce(const Vector2& force){

@@ -21,7 +21,7 @@ namespace JREngine {
 
 		Vector2 size;
 
-		std::vector<std::string> tileNames;
+		std::vector<std::string> tile_names;
 		std::vector<int> tiles;
 
 	};

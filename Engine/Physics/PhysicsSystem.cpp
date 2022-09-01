@@ -21,11 +21,11 @@ namespace JREngine {
 
 	b2Body* PhysicsSystem::CreateBody(const Vector2& pos, float angle, const RigidBodyData& data)
 	{
-		Vector2 worldPos = screenToWorld(pos);
+		Vector2 worldPosition = screenToWorld(pos);
 
 		b2BodyDef bodyDef;
 		bodyDef.type = (data.is_dynamic) ? b2_dynamicBody : b2_staticBody;
-		bodyDef.position = *((b2Vec2*)(&worldPos));
+		bodyDef.position = *((b2Vec2*)(&worldPosition));
 		bodyDef.angle = Math::DegToRad(angle);
 		bodyDef.fixedRotation = data.constrain_angle;
 		b2Body* body = m_world->CreateBody(&bodyDef);

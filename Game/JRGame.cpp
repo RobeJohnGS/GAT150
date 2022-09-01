@@ -5,7 +5,7 @@ void JRGame::Initialize(){
 	m_scene = std::make_unique<JREngine::Scene>();
 
 	rapidjson::Document document;
-	std::vector<std::string> sceneNames = { "Scenes/Prefab.txt", "Scenes/Tilemap.txt", "Scenes/Level.txt" };
+	std::vector<std::string> sceneNames = { "Scenes/Prefabs.txt", "Scenes/Tilemap.txt", "Scenes/Level.txt" };
 
 	for (auto sceneName : sceneNames) {
 		bool success = JREngine::json::Load(sceneName, document);

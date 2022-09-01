@@ -67,9 +67,9 @@ namespace JREngine {
 			if (actor) {
 				//read actor
 				actor->Read(actorValue);
-				bool preFab = false;
-				READ_DATA(actorValue, preFab);
-				if (preFab) {
+				bool prefab = false;
+				READ_DATA(actorValue, prefab);
+				if (prefab) {
 					std::string name = actor->GetName();
 					Factory::Instance().RegisterPrefab(name, std::move(actor));
 				} else {

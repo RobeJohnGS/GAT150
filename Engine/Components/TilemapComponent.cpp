@@ -10,7 +10,7 @@ namespace JREngine {
 				continue;
 			}
 
-			auto actor = Factory::Instance().Create<Actor>(tileNames[index]);
+			auto actor = Factory::Instance().Create<Actor>(tile_names[index]);
 			if (actor) {
 				int x = i % num_columns;
 				int y = i / num_columns;
@@ -33,7 +33,7 @@ namespace JREngine {
 		READ_DATA(value, num_columns);
 		READ_DATA(value, num_rows);
 		READ_DATA(value, size);
-		READ_DATA(value, tileNames);
+		READ_DATA(value, tile_names);
 		READ_DATA(value, tiles);
 
 		return true;

@@ -22,6 +22,11 @@ namespace JREngine {
 		virtual void OnCollisionEnter(Actor* other) override;
 		virtual void OnCollisionExit(Actor* other) override;
 		
+		//variables
 		float speed = 0.0f;
+
+		float jump = 300;
+
+		int m_groundCount = 0;
 	};
 }

@@ -128,16 +128,16 @@
          "components":[
             {
                "type":"TextComponent",
-               "text":"Hello World!",
+               "text":"Game Works!",
                "fontName":"fonts/Minecraftia-Regular.ttf",
-               "fontSize":48,
+               "fontSize":32,
                "registration":[
                   0.5,
                   0.5
                ],
                "color":[
                   255,
-                  255,
+                  0,
                   0,
                   255
                ]

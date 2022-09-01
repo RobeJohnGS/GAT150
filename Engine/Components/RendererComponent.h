@@ -14,13 +14,13 @@ namespace JREngine {
 		}
 
 		void SetFlipH(bool flip = true) {
-			flipH = flip;
+			flipHorizontal = flip;
 		}
 
 	protected:
 		//bit assignment
 		Rect source;
-		//8/30/22
-		bool flipH = false;
+		Vector2 registration = Vector2{ 0.5f, 0.5f };
+		bool flipHorizontal = false;
 	};
 }

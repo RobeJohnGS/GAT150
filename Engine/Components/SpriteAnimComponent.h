@@ -20,6 +20,8 @@ namespace JREngine {
 		virtual void Draw(Renderer& renderer) override;
 
 	public:
+		std::string name;
+
 		float fps = 0;
 		int num_columns = 0;
 		int num_rows = 0;
@@ -30,6 +32,8 @@ namespace JREngine {
 		int frame = 0;
 		float frameTimer = 0;
 
-		std::shared_ptr<Texture> m_texture;
+		bool loop = true;
+
+		std::shared_ptr<Texture> texture;
 	};
 }

@@ -24,6 +24,6 @@ namespace JREngine {
 		Vector2 velocity;
 		Vector2 acceleration;
 
-		float m_damping = 1.0f;
+		float damping = 1.0f;
 	};
 }

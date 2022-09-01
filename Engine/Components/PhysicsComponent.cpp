@@ -5,7 +5,7 @@ namespace JREngine {
 	void PhysicsComponent::Update(){
 		velocity += acceleration * time_g.deltaTime;
 		m_owner->m_transform.position += velocity * time_g.deltaTime;
-		velocity *= m_damping;
+		velocity *= damping;
 
 		acceleration = Vector2::zero;
 	}
@@ -15,7 +15,7 @@ namespace JREngine {
 	}
 
 	bool PhysicsComponent::Read(const rapidjson::Value& value){
-		READ_DATA(value, m_damping);
+		READ_DATA(value, damping);
 		READ_DATA(value, velocity);
 		READ_DATA(value, acceleration);
 

@@ -24,10 +24,10 @@ namespace JREngine {
 		//Variables
 		AudioChannel m_channel;
 
-		std::string m_soundName;
-		bool m_playOnAwake = false;
-		bool m_loop = false;
-		float m_volume = 1;
-		float m_pitch = 1;
+		std::string sound_name;
+		bool play_on_start = false;
+		bool loop = false;
+		float volume = 1;
+		float pitch = 1;
 	};
 }
