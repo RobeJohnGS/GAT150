@@ -11,7 +11,7 @@ void EnemyComponent::Update(){
 	auto actor = m_owner->GetScene()->GetActorFromName("Player");
 	if (actor) {
 		JREngine::Vector2 direction = actor->m_transform.position - m_owner->m_transform.position;
-		JREngine::Vector2 force = direction.Normalized() * speed;
+		JREngine::Vector2 force = direction.Normalized() * 0.02f;
 
 		auto component = m_owner->GetComponent<JREngine::PhysicsComponent>();
 		if (component) {

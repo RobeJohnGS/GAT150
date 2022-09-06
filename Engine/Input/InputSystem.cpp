@@ -8,6 +8,7 @@ namespace JREngine {
 	const uint32_t key_S = SDL_SCANCODE_S;
 	const uint32_t key_A = SDL_SCANCODE_A;
 	const uint32_t key_D = SDL_SCANCODE_D;
+	const uint32_t key_E = SDL_SCANCODE_E;
 	const uint32_t key_esc = SDL_SCANCODE_ESCAPE;
 
 	const uint32_t buttonLeft = 0;

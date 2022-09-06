@@ -41,6 +41,7 @@ namespace JREngine {
 		}
 
 		if (m_groundCount > 0 && inputSystem_g.GetKeyState(key_space) == InputSystem::KeyState::Pressed && canMove) {
+			JREngine::audioSystem_g.PlayAudio("jump");
 			auto component = m_owner->GetComponent<PhysicsComponent>();
 			if (component) {
 				component->ApplyForce(Vector2::up * jump);
@@ -100,6 +101,7 @@ namespace JREngine {
 			event.reciever = other;
 
 			eventManager_g.Notify(event);
+			other->SetDestroy();
 		}
 
 		if (other->GetTag() == "Ground")
@@ -130,6 +132,8 @@ namespace JREngine {
 		if (other->GetTag() == "Enemy") {
 			inBattle = false;
 			canMove = true;
+			other->SetActive(false);
+			other->SetDestroy(); 
 		}
 	}
 }

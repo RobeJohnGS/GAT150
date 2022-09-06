@@ -7,10 +7,17 @@ void JRGame::Initialize(){
 	//REGISTER_CLASS(EnemyComponent);
 	JREngine::Factory::Instance().Register<EnemyComponent>("EnemyComponent");
 
+	srand(time(0));
+
 	m_scene = std::make_unique<JREngine::Scene>();
 
+	JREngine::audioSystem_g.AddAudio("start", "Audio/start.wav");
+	JREngine::audioSystem_g.AddAudio("main-music", "Audio/main-music.wav");
+	JREngine::audioSystem_g.AddAudio("jump", "Audio/jump.wav");
+	JREngine::audioSystem_g.AddAudio("death", "Audio/death.wav");
+
 	rapidjson::Document document;
-	std::vector<std::string> sceneNames = { "Scenes/Prefabs.txt", "Scenes/Tilemap.txt", "Scenes/Level.txt" };
+	std::vector<std::string> sceneNames = { "Scenes/Level.txt", "Scenes/Prefabs.txt",  "Scenes/Tilemap.txt" };
 
 	for (auto sceneName : sceneNames) {
 		bool success = JREngine::json::Load(sceneName, document);
@@ -41,6 +48,8 @@ void JRGame::Update()
 
 		if (JREngine::inputSystem_g.GetKeyState(JREngine::key_space) == JREngine::InputSystem::KeyState::Pressed)
 		{
+			JREngine::audioSystem_g.PlayAudio("start");
+			JREngine::audioSystem_g.PlayAudio("main-music", 0.3f, 1.0f, true);
 			m_scene->GetActorFromName("Title")->SetActive(false);
 
 			m_gameState = gameState::start;
@@ -50,27 +59,22 @@ void JRGame::Update()
 
 	case gameState::start:
 		m_scene->GetActorFromName("Score")->SetActive(true);
-		m_scene->GetActorFromName("Health")->SetActive(true);
+		m_scene->GetActorFromName("Lives")->SetActive(true);
+		
 
-		for (int i = 0; i < 10; i++)
+		for (int i = 0; i < 11; i++)
 		{
-			auto actor = JREngine::Factory::Instance().Create<JREngine::Actor>("Coin");
-			actor->m_transform.position = { JREngine::Randomf(0, 800), 100.0f };
-			actor->Initialize();
-
-			m_scene->Add(std::move(actor));
-		}
-		for (int i = 0; i < 1; i++)
-		{
+			float enemySpawnX[11] = { 64, 320, 420, 64, 500, 64, 700, 44, 440, 240, 150 };
+			float enemySpawnY[11] = { 600, 600, 470, 410, 280, 190, 120, 90, 60, 0, 0};
 			auto actor = JREngine::Factory::Instance().Create<JREngine::Actor>("Demon");
-			actor->m_transform.position = { JREngine::Randomf(0, 800), 100.0f };
+			actor->m_transform.position = { (float)enemySpawnX[i], (float)enemySpawnY[i] };
 			actor->Initialize();
 
 			m_scene->Add(std::move(actor));
 		}
 		{
 			auto actor = JREngine::Factory::Instance().Create<JREngine::Actor>("Player");
-			actor->m_transform.position = { 400.0f, 250.0f };
+			actor->m_transform.position = { 100.0f, 500.0f };
 			actor->Initialize();
 
 			m_scene->Add(std::move(actor));
@@ -84,32 +88,86 @@ void JRGame::Update()
 		auto component = score->GetComponent<JREngine::TextComponent>();
 		if (component)
 		{
-			component->SetText(std::to_string(m_score));
+			component->SetText("Score: " + std::to_string(m_score));
 		}
 	}
 	{
-		auto health = m_scene->GetActorFromName("Health");
-		auto component = health->GetComponent<JREngine::TextComponent>();
+		auto lives = m_scene->GetActorFromName("Lives");
+		auto component = lives->GetComponent<JREngine::TextComponent>();
 		auto player = m_scene->GetActorFromName("Player");
 		if (player)
 		{
 			auto pcomponent = player->GetComponent<JREngine::PlayerComponent>();
 			if (component)
 			{
-				component->SetText(std::to_string((int)pcomponent->health));
+				component->SetText("Lives: " + std::to_string((int)m_lives));
 			}
 
 			if (pcomponent->inBattle) {
+				OnBattleStart();
 				m_gameState = gameState::battle;
 			}
+		}
+
+		if (m_lives == 0) {
+			m_gameState = gameState::gameOver;
 		}
 
 	}
 	break;
 	case gameState::battle:
-		std::cout << "battle\n";
-		if (JREngine::inputSystem_g.GetKeyState(JREngine::key_space) == JREngine::InputSystem::KeyState::Pressed)
+		if (JREngine::inputSystem_g.GetKeyState(JREngine::key_space) == JREngine::InputSystem::KeyState::Pressed) {
+			auto rollStart = m_scene->GetActorFromName("Roll-Start");
+			rollStart->SetActive(false);
+			int playerRoll = JREngine::Random(1, 20);
+			auto playerRollActor = m_scene->GetActorFromName("Player-Roll");
+			playerRollActor->SetActive(true);
+			auto playerRollComp = playerRollActor->GetComponent<JREngine::TextComponent>();
+			playerRollComp->SetText("Player: " + std::to_string(playerRoll));
+			
+			int enemyRoll = JREngine::Random(1, 20);
+			auto enemyRollActor = m_scene->GetActorFromName("Enemy-Roll");
+			enemyRollActor->SetActive(true);
+			auto enemyRollComp = enemyRollActor->GetComponent<JREngine::TextComponent>();
+			enemyRollComp->SetText("Enemy: " + std::to_string(enemyRoll));
+
+			auto resultRoll = m_scene->GetActorFromName("Result-Roll");
+			resultRoll->SetActive(true);
+			auto resultRollT = resultRoll->GetComponent<JREngine::TextComponent>();
+
+			if (enemyRoll > playerRoll) {
+				m_lives -= 1;
+				resultRollT->SetText("Enemy Win!");
+				if (m_lives <= 0) {
+					JREngine::audioSystem_g.PlayAudio("death");
+					m_gameState = gameState::gameOver;
+				}
+			}
+			else if (playerRoll > enemyRoll) {
+				AddPoints(100);
+				resultRollT->SetText("Player Win!");
+			}
+			else {
+				resultRollT->SetText("TIE?!");
+			}
+		}
+
+		if (JREngine::inputSystem_g.GetKeyState(JREngine::key_E) == JREngine::InputSystem::KeyState::Pressed)
 		{
+			auto playerRollActor = m_scene->GetActorFromName("Player-Roll");
+			playerRollActor->SetActive(false);
+			auto enemyRollActor = m_scene->GetActorFromName("Enemy-Roll");
+			enemyRollActor->SetActive(false);
+			auto resultRoll = m_scene->GetActorFromName("Result-Roll");
+			resultRoll->SetActive(false);
+
+			auto player = m_scene->GetActorFromName("Player");
+			auto pcomponent = player->GetComponent<JREngine::PlayerComponent>();
+			pcomponent->inBattle = false;
+			pcomponent->canMove = true;
+
+			
+
 			m_gameState = gameState::game;
 		}
 	break;
@@ -126,12 +184,13 @@ void JRGame::Update()
 		break;
 
 	case gameState::gameOver:
+		m_scene->GetActorFromName("Death")->SetActive(true);
 		break;
 
 	default:
 		break;
 	}
-
+	
 	if (m_gameState != gameState::battle) {
 		m_scene->Update();
 	}
@@ -146,8 +205,9 @@ void JRGame::OnNotify(const JREngine::Event& event){
 		OnAddPoints(event);
 	}
 
-	if (event.name == "EVENT_DAMAGE") {
-		OnBattleStart();
+	if (event.name == "EVENT_DAMAGE")
+	{
+		std::cout << "hit\n";
 	}
 
 	if (event.name == "EVENT_PLAYER_DEAD") {
@@ -170,19 +230,7 @@ void JRGame::OnPlayerDead(const JREngine::Event& event){
 
 void JRGame::OnBattleStart(){
 	{
-		auto actor = JREngine::Factory::Instance().Create<JREngine::Actor>("Demon");
-		actor->m_transform.position = { 600.0f, 250.0f };
-		actor->Initialize();
-
-		m_scene->Add(std::move(actor));
+		auto rollStart = m_scene->GetActorFromName("Roll-Start");
+		rollStart->SetActive(true);
 	}
-	{
-		auto actor = JREngine::Factory::Instance().Create<JREngine::Actor>("Player");
-		actor->m_transform.position = { 400.0f, 250.0f };
-		actor->Initialize();
-
-		m_scene->Add(std::move(actor));
-	}
-
-	m_gameState = gameState::battle;
 }

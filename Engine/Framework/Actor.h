@@ -62,8 +62,9 @@ namespace JREngine
 		}
 
 		void SetActive(bool active = true) {
-			this->active = active;
+ 			this->active = active;
 		}
+
 		bool IsActive() {
 			return active;
 		}

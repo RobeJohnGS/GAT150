@@ -15,6 +15,7 @@ void JREngine::Text::Create(Renderer& renderer, const std::string& text, const C
 	SDL_Surface* surface = TTF_RenderText_Solid(m_font->m_ttfFont, text.c_str(), c);
 
 	m_texture = SDL_CreateTextureFromSurface(renderer.m_renderer, surface);
+	
 	SDL_FreeSurface(surface);
 }
 
@@ -24,4 +25,5 @@ void JREngine::Text::Draw(Renderer& renderer, const Vector2& pos){
 
 	SDL_Rect rect{ (int)pos.x, (int)pos.y, width, height };
 	SDL_RenderCopy(renderer.m_renderer, m_texture, NULL, &rect);
+
 }

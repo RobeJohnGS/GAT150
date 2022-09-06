@@ -55,6 +55,7 @@ namespace JREngine {
 	extern const uint32_t key_A;
 	extern const uint32_t key_D;
 	extern const uint32_t key_esc;
+	extern const uint32_t key_E;
 
 	//mouse
 	extern const uint32_t buttonLeft;
