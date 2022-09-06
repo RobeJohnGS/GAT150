@@ -20,12 +20,12 @@ namespace JREngine {
 
 	bool TextComponent::Read(const rapidjson::Value& value){
 		READ_DATA(value, text);
-		READ_DATA(value, fontName);
-		READ_DATA(value, fontSize);
+		READ_DATA(value, font_name);
+		READ_DATA(value, font_size);
 		READ_DATA(value, registration);
 		READ_DATA(value, color);
 
-		m_font = resourceManager_g.Get<Font>(fontName, fontSize);
+		m_font = resourceManager_g.Get<Font>(font_name, font_size);
 
 		m_texture = std::make_unique<Texture>();
 

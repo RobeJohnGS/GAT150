@@ -7,9 +7,9 @@ namespace JREngine{
 	Actor::Actor(const Actor& other) {
 		name = other.name;
 		tag = other.tag;
+		lifespan = other.lifespan;
 		m_transform = other.m_transform;
 		m_scene = other.m_scene;
-		lifespan = other.lifespan;
 
 		for (auto& component : other.m_components) {
 			auto clone = std::unique_ptr<Component>((Component*)component->Clone().release());
@@ -27,7 +27,7 @@ namespace JREngine{
 	}
 
 	void Actor::Update() {
-		if (!m_active) {
+		if (!active) {
 			return;
 		}
 
@@ -56,7 +56,7 @@ namespace JREngine{
 	}
 
 	void Actor::Draw(Renderer& renderer){
-		if (!m_active) {
+		if (!active) {
 			return;
 		}
 
@@ -81,7 +81,7 @@ namespace JREngine{
 	{
 		READ_DATA(value, tag);
 		READ_DATA(value, name);
-		READ_DATA(value, m_active);
+		READ_DATA(value, active);
 		READ_DATA(value, lifespan);
 
 		if (value.HasMember("transform")) {
@@ -89,13 +89,13 @@ namespace JREngine{
 		}
 
 		if (value.HasMember("components") && value["components"].IsArray()) {
-			for (auto& compValue : value["components"].GetArray()) {
+			for (auto& componentValue : value["components"].GetArray()) {
 				std::string type;
-				READ_DATA(compValue, type);
+				READ_DATA(componentValue, type);
 
 				auto component = Factory::Instance().Create<Component>(type);
 				if (component) {
-					component->Read(compValue);
+					component->Read(componentValue);
 					AddComponent(std::move(component));
 				}
 			}

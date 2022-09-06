@@ -16,8 +16,7 @@ namespace JREngine {
 			data.size = data.size * scale_offset * m_owner->m_transform.scale;
 
 			if (component->m_body->GetType() == b2_staticBody) {
-				//titties
-				//physicsSystem_g.SetCollisionBoxStatic(component->m_body, data, m_owner);
+				physicsSystem_g.SetCollisionBoxStatic(component->m_body, data, m_owner);
 			} else {
 				physicsSystem_g.SetCollisionBox(component->m_body, data, m_owner);
 			}

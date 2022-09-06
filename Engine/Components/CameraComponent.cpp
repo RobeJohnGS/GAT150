@@ -9,21 +9,20 @@ namespace JREngine {
 	}
 
 	void CameraComponent::Update(){
-		Matrix3x3 mxTranslation = Matrix3x3::CreateTranslation(-m_owner->m_transform.position);
+		//Had to manually adjust the camera
+		Matrix3x3 mxTranslation = Matrix3x3::CreateTranslation(-m_owner->m_transform.position + Vector2{400, 300});
 		Matrix3x3 mxRotation = Matrix3x3::CreateRotation(-Math::DegToRad(m_owner->m_transform.rotation));
 
 		m_view = mxTranslation * mxRotation;
 
-		//titties
-		//renderer_g.SetViewMatrix(m_view);
+		renderer_g.SetViewMatrix(m_view);
 	}
 
 	void CameraComponent::SetViewport(const Vector2& size){
 		Matrix3x3 mxTranslation = Matrix3x3::CreateTranslation(size * 0.5f);
 
 		m_viewport = mxTranslation;
-		//titties
-		//renderer_g.SetViewMatrix(m_viewport);
+		renderer_g.SetViewMatrix(m_viewport);
 	}
 
 	bool CameraComponent::Write(const rapidjson::Value& value) const

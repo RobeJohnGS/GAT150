@@ -26,7 +26,7 @@ namespace JREngine {
 	}
 
 	bool TilemapComponent::Write(const rapidjson::Value& value) const{
-		return false;
+		return true;
 	}
 
 	bool TilemapComponent::Read(const rapidjson::Value& value){

@@ -20,7 +20,7 @@ namespace JREngine {
 
 		Vector2 GetSize() const;
 
-		//friend class Renderer;
+		friend class Renderer;
 		SDL_Texture* m_texture = nullptr;
 	private:
 	};

@@ -23,8 +23,8 @@ namespace JREngine {
 
 		//variables
 		std::string text;
-		std::string fontName;
-		int fontSize;
+		std::string font_name;
+		int font_size;
 		Vector2 registration;
 		Color color;
 

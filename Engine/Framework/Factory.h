@@ -2,7 +2,6 @@
 #include "Singleton.h"
 #include "Core/Logger.h"
 #include <memory>
-#include <string>
 #include <map>
 
 namespace JREngine {
@@ -68,7 +67,7 @@ namespace JREngine {
 		m_registry[key] = std::make_unique<PrefabCreator<T>>(std::move(instance));
 	}
 
-	template<typename T>
+	template <typename T>
 	inline std::unique_ptr<T> Factory::Create(const std::string& key)
 	{
 		auto iter = m_registry.find(key);

@@ -32,7 +32,7 @@ namespace JREngine
 
 	void Model::Draw(Renderer& renderer, const Vector2& position, float angle, const Vector2& scale){
 
-		for (int i = 0; i < m_points.size() - 1; i++)
+		for (size_t i = 0; i < m_points.size() - 1; i++)
 		{
 			Vector2 p1 = Vector2::Rotate((m_points[i] * scale), angle) + position;
 			Vector2 p2 = Vector2::Rotate((m_points[i + 1] * scale), angle) + position;
@@ -41,13 +41,13 @@ namespace JREngine
 	}
 
 	void Model::Draw(Renderer& renderer, const Transform& transform){
-		if (m_points.size() == 0) {
+		/*if (m_points.size() == 0) {
 			return;
-		}
+		}*/
 
 		Matrix3x3 mx = transform.matrix;
 
-		for (int i = 0; i < m_points.size() - 1; i++)
+		for (size_t i = 0; i < m_points.size() - 1; i++)
 		{
 			/*Vector2 p1 = Vector2::Rotate((points_[i] * transform.scale), Math::DegToRad(transform.rotation)) + transform.position;
 			Vector2 p2 = Vector2::Rotate((points_[i + 1] * transform.scale), Math::DegToRad(transform.rotation)) + transform.position;*/

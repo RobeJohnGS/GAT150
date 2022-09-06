@@ -8,6 +8,21 @@ namespace JREngine {
 
 	class SpriteAnimComponent : public RendererComponent {
 	public:
+		struct Sequence {
+			std::string name;
+
+			float fps = 0;
+			int num_columns = 0;
+			int num_rows = 0;
+
+			int start_frame = 0;
+			int end_frame = 0;
+
+			bool loop = true;
+
+			std::shared_ptr<Texture> texture;
+		};
+
 		CLASS_DECLARATION(SpriteAnimComponent)
 
 		virtual void Update() override;
@@ -15,26 +30,16 @@ namespace JREngine {
 		virtual bool Write(const rapidjson::Value& value) const override;
 		virtual bool Read(const rapidjson::Value& value) override;
 
-		//bit assignemtn
+		virtual void SetSequence(const std::string& name);
 		Rect& GetSource() override;
 
 		virtual void Draw(Renderer& renderer) override;
 
-	public:
-		std::string name;
-
-		float fps = 0;
-		int num_columns = 0;
-		int num_rows = 0;
-
-		int start_frame = 0;
-		int end_frame = 0;
-
+		//variables
 		int frame = 0;
 		float frameTimer = 0;
 
-		bool loop = true;
-
-		std::shared_ptr<Texture> texture;
+		std::map<std::string, Sequence> m_sequences;
+		Sequence* m_sequence = nullptr;
 	};
 }

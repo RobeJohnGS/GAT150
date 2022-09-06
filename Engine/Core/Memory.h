@@ -10,8 +10,9 @@
 // allocations to be of _CLIENT_BLOCK type
 #else
 #define new new
-#endif //_DEBUG
+#endif // _DEBUG
 
-namespace JREngine {
+namespace JREngine
+{
 	void InitializeMemory();
 }

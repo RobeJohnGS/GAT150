@@ -32,7 +32,7 @@ namespace Math {
 	}
 
 	template<typename T>
-	T Lerp(T min, T max, float t) {
+	T Lerp(T min, T max, float t){
 		t = Clamp(t, 0.0f, 1.0f);
 
 		return min + ((max - min) * t);

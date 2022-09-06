@@ -2,9 +2,7 @@
 #include "../Math/Vector2.h"
 #include <cstdint>
 #include <vector>
-#include <map>
 #include <array>
-#include <string>
 
 namespace JREngine {
 
@@ -46,8 +44,8 @@ namespace JREngine {
 		std::vector<uint8_t> m_prevKeyboardState;
 
 		Vector2 m_mousePos;
-		std::array<uint8_t, 3>m_mouseButtonState;
-		std::array<uint8_t, 3>m_prevMouseButtonState;
+		std::array<uint8_t, 3> m_mouseButtonState;
+		std::array<uint8_t, 3 >m_prevMouseButtonState;
 	};
 
 	//extern means you want to declare it but not define it.

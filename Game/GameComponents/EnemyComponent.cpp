@@ -1,4 +1,5 @@
 #include "EnemyComponent.h"
+#include "../Game/JRGame.h"
 #include "Engine.h"
 #include <iostream>
 
@@ -24,7 +25,7 @@ void EnemyComponent::OnCollisionEnter(JREngine::Actor* other){
 		JREngine::Event event;
 		event.name = "EVENT_DAMAGE";
 		event.data = damage;
-		event.receiver = other;
+		event.reciever = other;
 
 		JREngine::eventManager_g.Notify(event);
 	}

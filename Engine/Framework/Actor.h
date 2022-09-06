@@ -62,10 +62,10 @@ namespace JREngine
 		}
 
 		void SetActive(bool active = true) {
-			m_active = active;
+			this->active = active;
 		}
 		bool IsActive() {
-			return m_active;
+			return active;
 		}
 
 		Scene* GetScene() {
@@ -81,7 +81,7 @@ namespace JREngine
 		std::string name;
 		std::string tag;
 
-		bool m_active = true;
+		bool active = true;
 
 		float lifespan = 0;
 		bool m_destroy = false;

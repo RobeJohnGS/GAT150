@@ -34,9 +34,10 @@ namespace JREngine {
 		m_prevKeyboardState = m_keyboardState;
 
 		//get current keyboard state
-		const uint8_t* keyboardState = SDL_GetKeyboardState(&m_numKeys);
+		const uint8_t* keyboardState = SDL_GetKeyboardState(nullptr);
 		std::copy(keyboardState, keyboardState + m_numKeys, m_keyboardState.begin());
 
+		m_prevMouseButtonState = m_mouseButtonState;
 		m_prevMouseButtonState = m_mouseButtonState;
 
 		int x, y;

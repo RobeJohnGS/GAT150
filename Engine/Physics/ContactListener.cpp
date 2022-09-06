@@ -11,6 +11,10 @@ namespace JREngine {
 			Actor* actorA = (Actor*)(fixtureA->GetUserData().pointer);
 			Actor* actorB = (Actor*)(fixtureB->GetUserData().pointer);
 
+			if (actorA->IsDestroyed() || actorB->IsDestroyed()) {
+				return;
+			}
+
 			if (actorA->GetComponent<CollisionComponent>()) {
 				actorA->GetComponent<CollisionComponent>()->OnCollisionEnter(actorB);
 			}
@@ -28,6 +32,10 @@ namespace JREngine {
 		if (fixtureA->GetUserData().pointer && fixtureB->GetUserData().pointer) {
 			Actor* actorA = (Actor*)(fixtureA->GetUserData().pointer);
 			Actor* actorB = (Actor*)(fixtureB->GetUserData().pointer);
+
+			if (actorA->IsDestroyed() || actorB->IsDestroyed()) {
+				return;
+			}
 
 			if (actorA->GetComponent<CollisionComponent>()) {
 				actorA->GetComponent<CollisionComponent>()->OnCollisionExit(actorB);

@@ -72,7 +72,6 @@ namespace JREngine {
 		return nullptr;
 	}
 
-	//Fix
 	template<typename T>
 	inline std::vector<T*> Scene::GetActorFromTag(const std::string& tag)
 	{

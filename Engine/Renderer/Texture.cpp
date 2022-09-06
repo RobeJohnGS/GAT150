@@ -19,7 +19,6 @@ namespace JREngine {
 		va_end(args);
 
 		return Create(renderer, filename);
-		return false;
 	}
 
 	bool Texture::CreateFromSurface(SDL_Surface* surface, Renderer& renderer)
@@ -62,6 +61,6 @@ namespace JREngine {
 	Vector2 Texture::GetSize() const{
 		SDL_Point point;
 		SDL_QueryTexture(m_texture, nullptr, nullptr, &point.x, &point.y);
-		return Vector2{ point.x, point.y };
+		return Vector2(point.x, point.y);
 	}
 }

@@ -8,7 +8,6 @@ namespace JREngine {
 	//Go through each component header and impliment the virtual funtions
 	public:
 		Component() = default;
-		~Component() = default;
 
 		virtual void Initialize() override {}
 		virtual void Update() = 0;
